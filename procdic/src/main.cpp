@@ -20,7 +20,30 @@ int main() {
 	cout << "beginning with letter ... " << endl << endl;
 	cout << "A" << endl;
 	//cout << numHeadlines(A) << endl; //vai corresponder a uma funcao que tendo um dado char procura o numero de healines com esse char e escreve . para cada 100
-	cout << "B" << endl;
+/* 	cout << "B" << endl;
+	cout << "C" << endl;
+	cout << "D" << endl;
+	cout << "E" << endl;
+	cout << "F" << endl;
+	cout << "G" << endl;
+	cout << "H" << endl;
+	cout << "I" << endl;
+	cout << "J" << endl;
+	cout << "K" << endl;
+	cout << "L" << endl;
+	cout << "M" << endl;
+	cout << "N" << endl;
+	cout << "O" << endl;
+	cout << "P" << endl;
+	cout << "Q" << endl;
+	cout << "R" << endl;
+	cout << "S" << endl;
+	cout << "T" << endl;
+	cout << "U" << endl;
+	cout << "V" << endl;
+	cout << "X" << endl;
+	cout << "Y" << endl;
+	cout << "Z" << endl; */
 	//etc...
 	cout << endl;
 	cout << "Number of simple words = " /* << função que da o numero de simple words */ << endl;
