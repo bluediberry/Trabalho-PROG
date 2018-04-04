@@ -11,8 +11,11 @@ int Headlines(char letra, string dictionary_file) {
     c3 = "-";
     c4 = "'";
 
+    int linecount = 0;
+
+
     cout << dictionary_file;
-    
+
 
 
 

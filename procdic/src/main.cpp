@@ -11,10 +11,23 @@ int main() {
 	string dictionary_file;
 	string word_list_file;
 
+	ifstream f;
+	string line;
+	string linecount = 0;
+
 	cout << "EXTRACTION OF WORLD LIST FROM DICTIONARY" << endl;
 	cout << "==========================================" << endl << endl;
 	cout << "Dictionary file ? ";
 	cin >> dictionary_file;
+
+	f.open(dictionary_file);
+	if (!f.is_open())
+	{
+		cerr << "File " << dictionary_file << " not found !\n"; 
+		return(1);
+	}
+
+
 	cout << "Word list file ? ";
 	cin >> word_list_file;
 	cout << endl;
