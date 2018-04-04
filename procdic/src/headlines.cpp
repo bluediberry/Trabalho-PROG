@@ -2,7 +2,7 @@
 #include <cstring>
 
 int Headlines(char letra, string dictionary_file) {
-  //determinar os simbolos aceitaveis
+  //determinar os simbolos aceitaveiss
 
     char c1, c2, c3, c4;
 
@@ -10,9 +10,6 @@ int Headlines(char letra, string dictionary_file) {
     c2 = ";";
     c3 = "-";
     c4 = "'";
-
-    
-
 
 //percorrer o ficheiro do dicionario pela letra indicada
 //cada vez que for encontrada uma headline aumenta o contador
