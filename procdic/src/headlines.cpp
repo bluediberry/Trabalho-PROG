@@ -3,7 +3,7 @@
 
 int Headlines(char letra, string dictionary_file) {
 
-    char c1, c2, c3, c4;
+/*    char c1, c2, c3, c4;
     int NChar=0;
 
     c1 = " ";
@@ -14,7 +14,7 @@ int Headlines(char letra, string dictionary_file) {
     int linecount = 0;
 
 
-    cout << dictionary_file;
+    cout << dictionary_file;*/
 
 
 
