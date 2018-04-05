@@ -3,6 +3,7 @@
 #include <cstring>
 #include <fstream>
 #include <iomanip>
+#include <sstream>
 
 using namespace std;
 
@@ -10,15 +11,16 @@ int main() {
 
 	string dictionary_file;
 	string word_list_file;
-
 	ifstream f;
 	string line;
-	string linecount = 0;
+	int lineCount;
+
 
 	cout << "EXTRACTION OF WORLD LIST FROM DICTIONARY" << endl;
 	cout << "==========================================" << endl << endl;
 	cout << "Dictionary file ? ";
 	cin >> dictionary_file;
+
 
 	f.open(dictionary_file);
 	if (!f.is_open())
@@ -28,9 +30,21 @@ int main() {
 	}
 
 
+	cout << "FILE CONTENTS:\n";
+	lineCount = 0;
+	while (!f.eof())
+	{
+		getline(f, line);
+		cout << "LINE " << ++lineCount << " -> " << line << endl; // TO DO: process the line }
+//close the file f.close();
+		return 0;
+	}
+
 	cout << "Word list file ? ";
 	cin >> word_list_file;
 	cout << endl;
+
+
 	cout << "Extracting simple words from file " << dictionary_file << ", " << endl;
 	cout << "beginning with letter ... " << endl << endl;
 	cout << "A" << endl;
