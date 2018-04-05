@@ -36,7 +36,9 @@ int main() {
 	{
 		getline(f, line);
 		cout << "LINE " << ++lineCount << " -> " << line << endl; // TO DO: process the line }
-//close the file f.close();
+
+		//close the file
+		f.close();
 		return 0;
 	}
 
