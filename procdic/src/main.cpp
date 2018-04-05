@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <cstring>
-#include <fstring>
+#include <fstream>
 #include <iomanip>
 
 using namespace std;
@@ -23,7 +23,7 @@ int main() {
 	f.open(dictionary_file);
 	if (!f.is_open())
 	{
-		cerr << "File " << dictionary_file << " not found !\n"; 
+		cerr << "File " << dictionary_file << " not found !\n";
 		return(1);
 	}
 
