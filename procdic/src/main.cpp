@@ -36,12 +36,12 @@ int main() {
 		while (!f.eof())
 	{
 		getline(f, line);
-		cout << "LINE " << ++lineCount << " -> " << line << endl; // TO DO: process the line }
+		cout << "LINE " << ++lineCount << " -> " << line << endl;
+ // TO DO: process the line
+	 }
 
 		//close the file
 		f.close();
-		return 0;
-	}
 
 	cout << "Word list file ? ";
 	cin >> word_list_file;
