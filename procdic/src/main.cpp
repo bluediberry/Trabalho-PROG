@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iomanip>
 #include <sstream>
+#include <cstdlib>
 
 using namespace std;
 
@@ -25,14 +26,14 @@ int main() {
 	f.open(dictionary_file);
 	if (!f.is_open())
 	{
-		cerr << "File " << dictionary_file << " not found !\n";
+		cerr << "File " << dictionary_file << " not found!\n";
 		return(1);
 	}
 
-
 	cout << "FILE CONTENTS:\n";
 	lineCount = 0;
-	while (!f.eof())
+
+		while (!f.eof())
 	{
 		getline(f, line);
 		cout << "LINE " << ++lineCount << " -> " << line << endl; // TO DO: process the line }
