@@ -36,9 +36,11 @@ int main() {
 		while (!f.eof())
 	{
 		getline(f, line);
+		if(line.compare(line.length() - 1 - (line.length()-1), 1, "A") == 0) {
+		//cout << line.length() << " line length" << endl;
 		cout << "LINE " << ++lineCount << " -> " << line << endl;
- // TO DO: process the line
-	 }
+	}
+	}
 
 		//close the file
 		f.close();
