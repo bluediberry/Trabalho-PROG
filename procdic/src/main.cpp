@@ -5,8 +5,55 @@
 #include <iomanip>
 #include <sstream>
 #include <cstdlib>
+//#include "headlines.h"
 
 using namespace std;
+
+
+int headlines(string letra)
+ {
+	string dictionary_file;
+  ifstream f;
+ 	string line;
+ 	int lineCount;
+
+// cout << "Dictionary file ? ";
+  	cin >> dictionary_file;
+
+  	f.open(dictionary_file);
+    if (!f.is_open())
+    {
+      cerr << "File " << dictionary_file << " not found!\n";
+      return(1);
+    }
+
+  	cout << "FILE CONTENTS:\n";
+  	lineCount = 0;
+
+  		while (!f.eof())
+  	{
+  		getline(f, line);
+  		if(line.compare(line.length() - 1 - (line.length()-1), 1, letra) == 0) {
+  		//cout << line.length() << " line length" << endl;
+  		cout << "LINE " << ++lineCount << " -> " << line << endl;
+  	}
+  	}
+
+  		//close the file
+  		f.close();
+      return 0;
+
+}
+
+int numHeadlines(string letra)
+
+{
+
+      return 0;
+
+}
+
+
 
 int main() {
 
@@ -19,31 +66,10 @@ int main() {
 
 	cout << "EXTRACTION OF WORLD LIST FROM DICTIONARY" << endl;
 	cout << "==========================================" << endl << endl;
-	cout << "Dictionary file ? ";
-	cin >> dictionary_file;
+  cout << "Dictionary file ? ";
 
-
-	f.open(dictionary_file);
-	if (!f.is_open())
-	{
-		cerr << "File " << dictionary_file << " not found!\n";
-		return(1);
-	}
-
-	cout << "FILE CONTENTS:\n";
-	lineCount = 0;
-
-		while (!f.eof())
-	{
-		getline(f, line);
-		if(line.compare(line.length() - 1 - (line.length()-1), 1, "A") == 0) {
-		//cout << line.length() << " line length" << endl;
-		cout << "LINE " << ++lineCount << " -> " << line << endl;
-	}
-	}
-
-		//close the file
-		f.close();
+  headlines("A");
+  cout << endl;
 
 	cout << "Word list file ? ";
 	cin >> word_list_file;
@@ -52,8 +78,8 @@ int main() {
 
 	cout << "Extracting simple words from file " << dictionary_file << ", " << endl;
 	cout << "beginning with letter ... " << endl << endl;
+
 	cout << "A" << endl;
-	//cout << numHeadlines(A) << endl; //vai corresponder a uma funcao que tendo um dado char procura o numero de healines com esse char e escreve . para cada 100
 	cout << "B" << endl;
 	cout << "C" << endl;
 	cout << "D" << endl;
