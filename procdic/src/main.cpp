@@ -104,7 +104,6 @@ int main() {
     return(1);
   }
 
-  cout << "FILE CONTENTS:\n";
   lineCount = 0;
 
   vector<string> words;
@@ -131,7 +130,6 @@ int main() {
    // step 4
    // for i < words.size()
     // fout << words[i]
-}
 
 
 
