@@ -1,17 +1,17 @@
 #include <iostream>
 #include <string>
-#include <cstring>
 #include <fstream>
 #include <iomanip>
 #include <sstream>
 #include <cstdlib>
+#include <vector>
 //#include "headlines.h"
 
 using namespace std;
 
 
 
-int headlines(vector<string> &words, string line)
+void headlines(vector<string> &words, string line)
  {
    // is a headline?
    for(int i = 0; i < line.length(); i++)
@@ -27,19 +27,29 @@ int headlines(vector<string> &words, string line)
 // se caracter for letra
   // word = word + Hletra
 
+    if(line[i] < 'A' || line[i] > 'Z')
+      newword = newword + line[i];
+
   // else se caracter for ; ou espaço e word nao vazia
     // adicojnar word, apagara woerd
+      if(line[i] == ';' || line[i] == ' ') {
+        words.push_back(newword);
+        newword = "";
+        }
 
   // else se caracter for ; ou esapclo, e word vazia
     // continue;
+     if(line[i] == ';' || line[i] == ' ')
+     continue;
+
 
 
     // se line i for letr
-      newword = newword + line[i];
+    //  newword = newword + line[i];
 
       // quando line i for ; entao push newoord, newword = ""
 
-  }
+
 
   //words.push_back(coisa)
 
@@ -52,14 +62,14 @@ int headlines(vector<string> &words, string line)
   	}
   }
 */
-return 0;
+  }
 
 }
 
 int numHeadlines(string Hletra)
 
 {
-  lastline = linecount/100
+//  lastline = linecount/100
 
 /*  for(i=0; i <= linecount;  i++) {
     if(i%100 == 0)
@@ -116,7 +126,7 @@ int main() {
       // words.erase(j)
       //  ctr
 
-   words.sort(0, words.size());
+  // words.sort(0, words.size());
 
    // step 4
    // for i < words.size()
@@ -138,7 +148,6 @@ int main() {
 	cout << "beginning with letter ... " << endl << endl;
 
 	cout << "A" << endl;
-  numHeadlines("A");
   cout << "B" << endl;
 	cout << "C" << endl;
 	cout << "D" << endl;
