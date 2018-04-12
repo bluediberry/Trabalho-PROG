@@ -38,12 +38,14 @@ void headlines(vector<string> &words, string line)
           if(line[i] >= 'A' && line[i] <= 'Z')
           {
           newword = newword + line[i];
+          continue;
           }
 
-          if((line[i] == ';' || line[i] == ' ') && newword != "")
+         if((line[i] == ';' || line[i] == ' ') && newword != "")
           {
           words.push_back(newword);
           newword = "";
+          continue;
           }
 
           if((line[i] == ';' || line[i] == ' ') && newword == "")
