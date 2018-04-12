@@ -12,14 +12,13 @@ using namespace std;
 void headlines(vector<string> &words, string line)
  {
    //words.push_back("Hello");
-
-
    for(int i = 0; i < line.length(); i++) {
 
-     if(line[i] < 'A' || line[i] > 'Z' || line[i] != ';' || line[i] != ' ')
-         return;
-
     string newword = "";
+
+     if(line[i] < 'A' || line[i] > 'Z' || line[i] != ';' || line[i] != ' ')
+         continue;
+
     for(int i = 0; i < line.length(); i++)
       {
       if(line[i] >= 'A' && line[i] <= 'Z')
