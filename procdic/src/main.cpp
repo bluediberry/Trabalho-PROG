@@ -37,43 +37,21 @@ void headlines(vector<string> &words, string line)
          if(line[i] >= 'A' && line[i] <= 'Z')
           {
           newword = newword + line[i];
-          continue;
+					continue;
           }
 
+					if((line[i] == ';' || line[i] == ' ') && newword != "")
+	           {
+	           words.push_back(newword);
+	           newword = "";
+	           continue;
+	 				}
 
 					if(line[i] == '-' || line[i] == '\'')
 					 {
 					 newword = "";
 					 continue;
 				 }
-
-
-        if((line[i] == ';' || line[i] == ' ') && newword != "")
-          {
-          words.push_back(newword);
-          newword = "";
-          continue;
-				}
-
-
-			/*		if(line[i] >= 'A' && line[i] <= 'Z' && line[i] - 2 == ';' && line[i] - 1 == ' ' && newword != "")
-					 {
-						 newword = newword + line[i];
-					 	continue;
-					}*/
-
-
-			/*		 if(i == line.length() && newword != "")
-						{
-						words.push_back(newword);
-						newword = "";
-						continue;
-					}*/
-
-
-          if((line[i] == ';' || line[i] == ' ') && newword == "")
-          continue;
-
       }
     }
   }
