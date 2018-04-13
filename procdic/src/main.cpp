@@ -53,7 +53,8 @@ void headlines(vector<string> &words, string line)
           words.push_back(newword);
           newword = "";
           continue;
-          }
+				}
+
 
 			/*		if(line[i] >= 'A' && line[i] <= 'Z' && line[i] - 2 == ';' && line[i] - 1 == ' ' && newword != "")
 					 {
