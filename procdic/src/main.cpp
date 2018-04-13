@@ -34,7 +34,7 @@ void headlines(vector<string> &words, string line)
         for(int i = 0; i < line.length(); i++)
         {
 
-          if(line[i] >= 'A' && line[i] <= 'Z')
+         if(line[i] >= 'A' && line[i] <= 'Z')
           {
           newword = newword + line[i];
           continue;
@@ -45,10 +45,10 @@ void headlines(vector<string> &words, string line)
 					 {
 					 newword = "";
 					 continue;
-					 }
+				 }
 
 
-         if((line[i] == ';' || line[i] == ' ') && newword != "")
+        if((line[i] == ';' || line[i] == ' ') && newword != "")
           {
           words.push_back(newword);
           newword = "";
@@ -89,7 +89,6 @@ int main() {
   ofstream fo;
 	string line;
   vector<string> words;
-	vector<string> wordVectors[26];
 
 
 	cout << "EXTRACTION OF WORLD LIST FROM DICTIONARY" << endl;
