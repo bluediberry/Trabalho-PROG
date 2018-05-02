@@ -13,12 +13,13 @@ int main()
     int Option;
     int Lines, Columns;
 
-    cout << "CROSSWORDS PUZZLE CREATOR" << endl << endl;
-
+    cout << "CROSSWORDS PUZZLE CREATOR" << endl;
+    cout << "=============================================" << endl;
     cout << "INSTRUCTIONS:" << endl << endl;
-    cout << "Position (Line Column Direction / Crtz-Z = Stop)" << endl;
+    cout << "Position ( LCD / Crtz-Z = Stop)" << endl;
+    cout << "LCD stands for Line Column and Direction" << endl;
     // TO COMPLETE
-
+    cout << "----------------------------------------------" << endl;
     cout << "OPTIONS:" << endl;
     cout << "1 - Create Puzzle" << endl;
     cout << "2 - Resume Puzzle" << endl;
