@@ -13,6 +13,19 @@ int main()
     int Option;
     int Lines, Columns;
 
+
+    /*  clrscr();
+       srand((unsigned int)time(NULL));
+       for (int x = 0; x < 80; x++)
+       for (int y = 0; y < 24; y++)
+       {
+       gotoxy(x, y);
+       if (rand() % 2 == 0)
+       setcolor(x % 15 + 1);
+       else
+       setcolor(y % 15 + 1, rand() % 2);
+       cout << x % 10; */
+
     cout << "CROSSWORDS PUZZLE CREATOR" << endl;
     cout << "=============================================" << endl;
     cout << "INSTRUCTIONS:" << endl << endl;

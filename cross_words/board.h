@@ -12,11 +12,11 @@ class Board
 {
 public:
 	Board(string lines, string columns);
-	void show();
+	void Show();
 private:
 	unsigned int lines;
 	unsigned int columns;
-	vector<vector<char> > matrix;
+	vector<vector<char>> matrix;
 	vector<char> name_lines;
 	vector<char> name_columns;
 };
