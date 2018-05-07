@@ -1,7 +1,5 @@
 // contains the main functions for the console application
-//
-//#include "dictionary.h"
-//#include "Board.h"
+// ...
 #include <iostream>
 #include <fstream>
 #include <stdio.h>
@@ -13,24 +11,188 @@
 #include <ctype.h>
 #include <ctime>
 #include <sstream>
+#include "dictionary.h"
+#include "board.h"
 
 using namespace std;
 
-
+//
+// ...
 void uppercase(string &word)
 {
 	for (unsigned int i = 0; i < word.length(); ++i)
 		word[i] = toupper(word[i]);
 }
 
+//
+// ...
+void removeWord(string &location, Board &b1, vector<string> &positions, vector<string> &words)
+{
+	for (unsigned int i = 0; i < positions.size(); i++)
+	{
+		if (positions.at(i) == location)
+		{
+			positions.erase(positions.begin() + i);
+			words.erase(words.begin() + i);
+		}
+	}
+	for (unsigned int j = 0; j < positions.size(); j++)
+	{
+		b1.updateBoard(positions.at(j), words.at(j));
+	}
+}
 
+//
+// ...
+void resetBoard(Board &b1, unsigned int x, unsigned int y)
+{
+	Board b2(x, y);
+	b1 = b2;
+}
+
+//
+// ...
+void getSuggestion(string &location, Dictionary &d1, Board &b1)
+{
+	for (unsigned int i = 0; i < d1.nWords(); i++)
+	{
+		string snnm = d1.wordsList(i);
+		uppercase(snnm);
+		if (b1.wordFits(location, snnm))
+		{
+			cout << snnm << " ";
+		}
+	}
+}
+
+//
+// ...
+void openFile(string &filename, ifstream &f)
+{
+	do {
+		// Reads the dictionary file name
+		cout << "Dictionary File ? ";
+		getline(cin, filename);
+		// Opens the dictionary file;
+		f.open(filename);
+		if (!f.is_open())
+		{
+			cerr << "Dictionary File ? " << filename << " not found !\n";
+		}
+	} while (!f.is_open());
+}
+
+
+//
+// ...
+void crosswords(string &location, string &input, Dictionary &d1, Board &b1, vector<string> &words, vector<string> &positions,  unsigned int x, unsigned int y)
+{
+	cout << "Position ( LCD / CTRL-Z = stop ) ? ";
+	cin >> location;
+	while (!isupper(location.at(0)) || isupper(location.at(1)))
+	{
+		cout << endl << "Please type the first letter in upper case and the second letter in lower case." << endl;
+		cin.clear();
+		cin.ignore(99999, '\n');
+		cout << "Position ( LCD / CTRL-Z = stop ) ? ";
+		cin >> location;
+	}
+	cout << "Word ( - = remove / ? = help ) .. ? ";
+	cin >> input;
+	uppercase(input);
+	while (!d1.isInDictionary(input))
+	{
+		cin.clear();
+		cin.ignore(99999, '\n');
+		if (input == "-")
+		{
+			resetBoard(b1, x, y); //define
+			removeWord(location, b1, positions, words); //define
+			cout << endl;
+			b1.showBoard(x, y);
+			break;
+		}
+		if (input == "?")
+		{
+			getSuggestion(location, d1, b1); //define
+		}
+		if (input != "?")
+		{
+			cout << endl;
+			cout << "Please insert a valid word." << endl;
+			cout << "Word ( - = remove / ? = help ) ..? ";
+			cin >> input;
+			uppercase(input);
+		}
+		else
+		{
+			cout << endl;
+			cout << "Word ? ";
+			cin >> input;
+			uppercase(input);
+		}
+	}
+	if (input != "-")
+		if (b1.wordFits(location, input))
+		{
+			positions.push_back(location);
+			words.push_back(input);
+			b1.updateBoard(location, input);
+			cout << endl;
+			b1.showBoard(x, y);
+		}
+
+}
+
+//
+// ...
+void createBoard()
+{
+	unsigned int x;
+	unsigned int y;
+	string location;
+	string input;
+	string filename;
+	ifstream f;
+	vector<string> words;
+	vector<string> positions;
+
+	cout << "CREATE PUZZLE" << endl;
+	cout << "-------------------------------------------" << endl;
+	openFile(filename, f);
+	Dictionary d1(f);
+	cout << "Board size (lines columns) ? ";
+	cin >> x >> y;
+	while ((x > 26 || y > 26) || (x <= 0 || y <= 0))
+	{
+		cout << endl << "Please choose a number between 1 and 26." << endl;
+		cin.clear();
+		cin.ignore(99999, '\n');
+		cout << endl << "Board size (lines columns)? ";
+		cin >> x >> y;
+	}
+	Board b1(x, y);
+	cout << endl;
+	b1.showBoard(x, y);
+
+	while (cin)
+	{
+
+		cout << endl;
+		crosswords(location, input, d1, b1, words, positions, x, y);
+
+	}
+}
+
+//
+// ...
 int main()
 {
-		string dictionary_file;
+		string filename;
     ifstream f;
 		unsigned int option;
     vector<string> words;
-    vector<string> locations;
+    vector<string> positions;
 
 		cout << "CROSSWORDS PUZZLE CREATOR" << endl;
     cout << "=============================================" << endl << endl;
@@ -64,7 +226,7 @@ int main()
 	        switch (option)
 	         {
 	         case 1:
-		          //Create_Board();
+		          createBoard();
 		          break;
 	          }
 

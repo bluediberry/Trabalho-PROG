@@ -1,0 +1,1 @@
+/Library/Developer/CommandLineTools/usr/bin/c++  -g -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/cross_words.dir/board.cpp.o CMakeFiles/cross_words.dir/cwcreator.cpp.o CMakeFiles/cross_words.dir/dictionary.cpp.o  -o cross_words 

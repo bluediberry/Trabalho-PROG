@@ -1,24 +1,24 @@
 
-#ifndef PROG_EXERC_DATE_H
-#define PROG_EXERC_DATE_H
-
+#ifndef BOARD_H
+#define BOARD_H
+#include <iostream>
 #include <string>
 #include <vector>
 
 using namespace std;
 
-
 class Board
 {
 public:
-	Board(string lines, string columns);
-	void Show();
+	Board(unsigned int x, unsigned int y);
+	void updateBoard(string location, string input);
+	void showBoard(unsigned int x, unsigned int y);
+	bool wordFits(string location, string input);
+	//void setcolor(string color, string background_color);
+
 private:
-	unsigned int lines;
-	unsigned int columns;
-	vector<vector<char>> matrix;
-	vector<char> name_lines;
-	vector<char> name_columns;
+	vector<vector<char> > board;
+	int numLines, numCols;
 };
 
 #endif

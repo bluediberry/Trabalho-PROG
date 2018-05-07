@@ -1,90 +1,109 @@
-#include "dictionary.h"
+//
+// ...
 #include <iostream>
-#include <vector>
-#include <map>
 #include <string>
-#include <algorithm>
+#include <vector>
 #include <fstream>
+#include <iomanip>
+#include "dictionary.h"
+#include <map>
 
 using namespace std;
 
-Dictionary::Dictionary()
+
+//
+// ...
+bool isValid(string word)
 {
-	synonymslist[""] = { "" };
-	validwordslist = { "" };
+
+	int position = 0;
+
+	for (unsigned int i = 0; i < word.length(); i++)
+	{
+		char c = word[i];
+		if ((c<'A' || c>'Z') && c != ' ' && c != '-')
+			return false;
+		else
+			position++;
+	}
+
+	if (position == word.length())
+		return true;
+	return false;
 }
 
-Dictionary::Dictionary(string filename)
+//
+// ...
+void uppercasel(string &word)
 {
-	loadfile(filename);
+	for (unsigned int i = 0; i < word.length(); ++i)
+		word[i] = toupper(word[i]);
 }
 
-void uppercase(string &word)
-{
-	transform(word.begin(), word.end(), word.begin(), toupper);
-}
 
-
-void Dictionary::loadfile(string filename)
+//
+// ...
+Dictionary::Dictionary(ifstream &f)
 {
-	ifstream dictionary;
-	string words;
 	string line;
-	string mainwordlist;
-	int wordlist = 0;
-	int	next = 0;
+	vector<string> emptyVec;
 
-	dictionary.open(filename);
-
-	// Open the file; exit program if the file couldn't be opened
-	if (!dictionary.is_open())
+	while (getline(f, line))
 	{
-		cerr << "File " << "dictionary" << " not found !\n";
-		exit(1);
-	}
+		uppercasel(line);
+		vector<string> synonyms;
+		string word = line.substr(0, line.find_first_of(':'));
+		string synonym = line.substr(line.find_first_of(':') + 2, line.length());
 
-	while (getline(dictionary, line))
-	{
-		uppercase(words);
-
-		// Once you find ":", save the words from a list of synonyms
-		wordlist = line.find(":");
-		mainwordlist = line.substr(0, wordlist);
-
-		synonymslist.insert(pair<string, vector<string>>(mainwordlist, vector<string>()));
-		validwordslist.push_back(words);
-
-		next = wordlist + 2; // next word
-		wordlist = line.find_first_of(",", next);
-
-		while (wordlist != string::npos)
+		while (synonym.find(',') <= synonym.length())
 		{
-			words = line.substr(next, wordlist - next);
-			uppercase(words);
-			// Update the list of synonyms
-			synonymslist[mainwordlist].push_back(words);
 
-			next = wordlist + 2; // next word
-			wordlist = line.find_first_of(",", next);
+			if (isValid(synonym.substr(0, synonym.find_first_of(','))))
+			{
+				synonyms.push_back(synonym.substr(0, synonym.find_first_of(',')));
+			}
+			if (synonym.length() <= synonym.find(',') + 1)
+				break;
+			synonym = synonym.substr(synonym.find(',') + 2, synonym.length());
 		}
-
-		// Check for more synonyms
-		if (line[line.length() - 1] != ',')
+		if (synonym.length() != 0)
 		{
-			words = line.substr(next, line.length() - next);
-			uppercase(words);
-			// Update the list of synonyms
-			synonymslist[mainwordlist].push_back(words);
+			if (isValid(synonym))
+			{
+				synonyms.push_back(synonym);
+			}
+
 		}
+		words.insert(pair<string, vector<string> >(word, synonyms));
+		possibleWords.push_back(word);
 	}
 }
 
-bool Dictionary::validword(string word)
+
+//
+// ...
+int Dictionary::nWords()
 {
-	bool isvalid;
+	return possibleWords.size();
+}
 
-  //......
+//
+// ...
+string Dictionary::wordsList(unsigned int i)
+{
+	return possibleWords[i];
+}
 
-	return isvalid;
+//
+// ...
+bool Dictionary::isInDictionary(string word)
+{
+	vector<string> newVector;
+	if (words[word] == newVector)
+	{
+		return false;
+	}
+	else
+		return true;
 
 }
