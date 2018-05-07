@@ -1,58 +1,73 @@
-#include "Dictionary.h"
-#include "Board.h"
+// contains the main functions for the console application
+//
+//#include "dictionary.h"
+//#include "Board.h"
 #include <iostream>
 #include <fstream>
 #include <stdio.h>
+#include <iomanip>
+#include <string>
+#include <vector>
+#include <cstdlib>
+#include <map>
+#include <ctype.h>
+#include <ctime>
+#include <sstream>
 
 using namespace std;
 
+
+void uppercase(string &word)
+{
+	for (unsigned int i = 0; i < word.length(); ++i)
+		word[i] = toupper(word[i]);
+}
+
+
 int main()
 {
-    // Variáveis
-    string Dictionary;
-    int Option;
-    int Lines, Columns;
+		string dictionary_file;
+    ifstream f;
+		unsigned int option;
+    vector<string> words;
+    vector<string> locations;
 
-
-    /*  clrscr();
-       srand((unsigned int)time(NULL));
-       for (int x = 0; x < 80; x++)
-       for (int y = 0; y < 24; y++)
-       {
-       gotoxy(x, y);
-       if (rand() % 2 == 0)
-       setcolor(x % 15 + 1);
-       else
-       setcolor(y % 15 + 1, rand() % 2);
-       cout << x % 10; */
-
-    cout << "CROSSWORDS PUZZLE CREATOR" << endl;
-    cout << "=============================================" << endl;
-    cout << "INSTRUCTIONS:" << endl << endl;
-    cout << "Position ( LCD / Crtz-Z = Stop)" << endl;
-    cout << "LCD stands for Line Column and Direction" << endl;
-    // TO COMPLETE
+		cout << "CROSSWORDS PUZZLE CREATOR" << endl;
+    cout << "=============================================" << endl << endl;
+		cout << "INSTRUCTIONS: " << endl << endl;
+    cout << "The objetive of this Crosswords puzzle creator is to allow you to create a new puzzle from scratch and save it, so that then you can complete it in your own time." << endl;
+    cout << "In order to do this you start by defining: " << endl;
+    cout << "-> The number of rows and columns you want your board to have" << endl;
+    cout << "-> The position of the first letter of the word you want to insert on the board." << endl;
+    cout << "Position ( LCD / Crtz-Z = Stop)" << endl;
+    cout << "LCD stands for Line Column and Direction, and they are introduced in that order." << endl;
     cout << "----------------------------------------------" << endl;
-    cout << "OPTIONS:" << endl;
-    cout << "1 - Create Puzzle" << endl;
-    cout << "2 - Resume Puzzle" << endl;
-    cout << "3 - Exit" << endl;
-    cout << "Option ? ";
-    cin >> Option;
+		cout << "OPTIONS: " << endl;
+		cout << "1 - Create Puzzle " << endl;
+		cout << "2 - Resume Puzzle " << endl;
+		cout << "0 - Exit " << endl;
+		cout << "Option ?" << endl;
+		cin >> option;
 
-    if (Option == 1)
-    {
-        cout << "CREATE PUZZLE" << endl << endl;
-        cout << "Dictionary File Name ?" << endl;
-        cin >> Dictionary;
-        cout << "Board Size (Lines Columns) ? ";
-        cin >> Lines >> Columns;
 
-        // Mostrar Board Vazio Com as Dimensoes do Input
+    while (option != 1 && option != 2 && option != 0)
+	     {
+		        cout << endl << "Please enter a valid option." << endl;
+		        cout << endl << "Option ? ";
+		        cin >> option;
+		        cin.clear();
+		        cin.ignore(9999, '\n');
+	      }
 
-        cout << "Position (Line Column Direction / Crtz-z = Stop"
+	       cout << "-------------------------------------------" << endl;
 
-    }
+	        switch (option)
+	         {
+	         case 1:
+		          //Create_Board();
+		          break;
+	          }
 
-    return 0;
+	   return 0;
+
 }

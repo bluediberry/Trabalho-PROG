@@ -60,7 +60,7 @@ void Dictionary::loadfile(string filename)
 		while (wordlist != string::npos)
 		{
 			words = line.substr(next, wordlist - next);
-			uppercase_letters(words);
+			uppercase(words);
 			// Update the list of synonyms
 			synonymslist[mainwordlist].push_back(words);
 
@@ -72,7 +72,7 @@ void Dictionary::loadfile(string filename)
 		if (line[line.length() - 1] != ',')
 		{
 			words = line.substr(next, line.length() - next);
-			uppercase_letters(words);
+			uppercase(words);
 			// Update the list of synonyms
 			synonymslist[mainwordlist].push_back(words);
 		}
