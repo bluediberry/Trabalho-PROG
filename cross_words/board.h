@@ -14,7 +14,7 @@ public:
 	void updateBoard(string location, string input);
 	void showBoard(unsigned int x, unsigned int y);
 	bool wordFits(string location, string input);
-	//void setcolor(string color, string background_color);
+	//void Write(string &filename, ifstream &f);
 
 private:
 	vector<vector<char> > board;

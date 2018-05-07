@@ -104,7 +104,7 @@ void Board::showBoard(unsigned int x, unsigned int y)
   		for (unsigned int j = 0; j < y + 1; j++)
   		{
   			if (i == 0 || j == 0)
-  				setcolor(LIGHTBLUE, LIGHTBLUE);
+  				setcolor(LIGHTRED, LIGHTRED);
   			else
   				setcolor(LIGHTBLUE, LIGHTBLUE);
   			if (j == 0)
@@ -203,3 +203,25 @@ void Board::updateBoard(string location, string input)
 		break;
 	}
 }
+
+
+
+/*void Board::Write(string &filename, outstream &f)
+{
+
+    ofstream outStream;
+    string outFileName;
+
+    cout << "Insert name of file to write: ";
+    cin >> outFileName;
+
+    outStream.open(outFileName);
+    outStream << "Words taken from: " << filename << endl;
+    outStream << board;
+
+    for (auto &it : &words) {
+        outStream << setw(8) << left << it.first << it.second << endl;
+    }
+
+    cout << "Writing finished." << endl;
+}*/
