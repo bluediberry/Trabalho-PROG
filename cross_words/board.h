@@ -16,7 +16,7 @@ public:
 	bool wordFits(string location, string input);
     bool checkIfFull(unsigned int x, unsigned int y);
     void Finish(unsigned int x, unsigned int y);
-	void Write(ofstream& file, string name, unsigned int x, unsigned int y, vector<string> &positions);
+	void Write(ofstream& file, string name, unsigned int x, unsigned int y, vector<string> &positions, vector<string> &words);
 
 private:
 	vector<vector<char> > board;

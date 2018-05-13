@@ -204,17 +204,10 @@ void Board::Finish(unsigned int x, unsigned int y)
 
 //
 // ...
-void Board::Write(ofstream& file, string name, unsigned int x, unsigned int y, vector<string> &positions)
+void Board::Write(ofstream& file, string name, unsigned int x, unsigned int y, vector<string> &positions, vector<string> &words)
 {
     file << name << endl << endl;
-   /* for (int i = 0; i < x; i++)
-    {
-        for (int j = 0; j < y; j++){
-            file << board[i][j];
-        file << endl;
-        }
-    }
-*/
+
     for (size_t i = 1; i < board.size(); i++) {
         for (size_t j = 1; j < board.at(i).size(); j++)
             file << board.at(i).at(j) << ' ';
@@ -224,6 +217,7 @@ void Board::Write(ofstream& file, string name, unsigned int x, unsigned int y, v
 
     for (size_t i = 0; i < positions.size(); i++)
         for (size_t j = 0; j < positions.size(); j++)
-        file << positions.at(i).at(0) << positions.at(i).at(1) << positions.at(i).at(2)  <<   endl;
+        file << positions.at(i).at(0) << positions.at(i).at(1) << positions.at(i).at(2)
+             << ' ' << words.at(i) << endl;
     file.close();
 }

@@ -125,7 +125,7 @@ void openFile(string &filename, ifstream &f)
 
 //
 // ...
-void save_board(Board &b1, unsigned int x, unsigned int y, vector<string> &positions)
+void save_board(Board &b1, unsigned int x, unsigned int y, vector<string> &positions, vector<string> &words)
 {
     string oname = filename("Board");
     ofstream of;
@@ -136,7 +136,7 @@ void save_board(Board &b1, unsigned int x, unsigned int y, vector<string> &posit
         exit(3);
     }
     cout << "Writing file " << oname << "." << endl;
-    b1.Write(of, oname, x, y, positions);
+    b1.Write(of, oname, x, y, positions, words);
     cin.clear();
     cin.ignore(9999, '\n');
 
@@ -240,6 +240,7 @@ void createBoard()
 	vector<string> words;
 	vector<string> positions;
 
+
 	cout << "CREATE PUZZLE" << endl;
 	cout << "-------------------------------------------" << endl;
 	openFile(filename, f);
@@ -258,14 +259,13 @@ void createBoard()
 	cout << endl;
 	b1.showBoard(x, y);
 
-	while (!cin.eof() && !b1.checkIfFull(x,y))
-	{
+        while (!cin.eof() && !b1.checkIfFull(x, y)) {
 
-		cout << endl;
-		crosswords(location, input, d1, b1, words, positions, x, y);
+            cout << endl;
+            crosswords(location, input, d1, b1, words, positions, x, y);
 
-	}
-
+        }
+    
     cin.clear();
     cin.ignore(9999, '\n');
     cout << "============================" << endl;
@@ -285,11 +285,11 @@ void createBoard()
     }
     switch (option) {
         case 1:
-            save_board(b1 , x, y, positions);
+            save_board(b1 , x, y, positions, words);
             break;
         case 2:
             b1.Finish(x, y);
-            save_board(b1, x, y, positions);
+            save_board(b1, x, y, positions, words);
             break;
         case 3:
             return;

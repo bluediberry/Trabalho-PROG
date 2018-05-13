@@ -1,9 +1,8 @@
-B001.TXT
+b001.txt
 
-. . # . . 
-. . P . . 
-. . A . . 
-. . V . . 
-. . E . . 
+R D 
+E R 
 
-BcV 
+AaV RE
+AaV DR
+
