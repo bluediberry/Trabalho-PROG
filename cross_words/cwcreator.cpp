@@ -18,6 +18,17 @@ using namespace std;
 
 //
 // ...
+string filename(const string& s)
+{
+    cout << endl << s << " file name ? ";
+    string name;
+    cin >> name;
+    return name;
+}
+
+
+//
+// ...
 void uppercase(string &word)
 {
 	for (unsigned int i = 0; i < word.length(); ++i)
@@ -82,14 +93,35 @@ void openFile(string &filename, ifstream &f)
 	} while (!f.is_open());
 }
 
+//
+// ...
+void save_board(Board &b1, unsigned int x, unsigned int y, vector<string> &positions)
+{
+    string oname = filename("Board");
+    ofstream of;
+    of.open(oname);
+    if (of.fail())
+    {
+        cerr << "Error opening file" << endl;
+        exit(3);
+    }
+    cout << "Writing file " << oname << "." << endl;
+    b1.Write(of, oname, x, y, positions);
+    cin.clear();
+    cin.ignore(9999, '\n');
+}
 
 //
 // ...
 void crosswords(string &location, string &input, Dictionary &d1, Board &b1, vector<string> &words, vector<string> &positions,  unsigned int x, unsigned int y)
 {
+
+   while (!cin.eof() && !b1.checkIfFull(x, y))
+    {
+
 	cout << "Position ( LCD / CTRL-Z = stop ) ? ";
 	cin >> location;
-	while (!isupper(location.at(0)) || isupper(location.at(1)))
+	while (!isupper(location.at(0)) || isupper(location.at(1)) || (location.at(2) != 'H' && location.at(2) != 'V'))
 	{
 		cout << endl << "Please type the first letter in upper case and the second letter in lower case." << endl;
 		cin.clear();
@@ -106,8 +138,8 @@ void crosswords(string &location, string &input, Dictionary &d1, Board &b1, vect
 		cin.ignore(99999, '\n');
 		if (input == "-")
 		{
-			resetBoard(b1, x, y); //define
-			removeWord(location, b1, positions, words); //define
+			resetBoard(b1, x, y);
+			removeWord(location, b1, positions, words);
 			cout << endl;
 			b1.showBoard(x, y);
 			break;
@@ -141,6 +173,35 @@ void crosswords(string &location, string &input, Dictionary &d1, Board &b1, vect
 			cout << endl;
 			b1.showBoard(x, y);
 		}
+
+    }
+
+        cin.clear();
+        cout << "============================" << endl;
+        cout << "        SAVE BOARD " << endl;
+        cout << "============================" << endl << endl;
+        cout << "1) Save to complete later." << endl;
+        cout << "2) Save and finish." << endl;
+        cout << "3) Do not save." << endl;
+        int option;
+        cin >> option;
+        while (option > 3 || option < 1 || cin.fail() || cin.eof()) {
+            cin.clear();
+            cin.ignore(10, '\n');
+            cout << "Invalid option! Try again." << endl;
+            cin >> option;
+        }
+        switch (option) {
+            case 1:
+                save_board(b1, x, y, positions);
+                break;
+            case 2:
+                b1.Finish(x, y);
+                save_board(b1, x, y, positions);
+                break;
+            case 3:
+                return;
+        }
 
 }
 
@@ -225,9 +286,15 @@ int main()
 
 	        switch (option)
 	         {
-	         case 1:
-		          createBoard();
-		          break;
+	             case 1:
+                     createBoard();
+		             break;
+
+                 case 2:
+                     break;
+
+                 default:
+                     break;
 	          }
 
 	   return 0;

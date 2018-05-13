@@ -9,18 +9,6 @@
 /Users/Mariana/Documents/GitHub/Trabalho-PROG/cross_words/board.cpp
 board.h
 /Users/Mariana/Documents/GitHub/Trabalho-PROG/cross_words/board.h
-vector
--
-iostream
--
-string
--
-ctime
--
-cstdlib
--
-fstream
--
 iomanip
 -
 map
@@ -38,6 +26,12 @@ string
 sstream
 -
 unistd.h
+-
+fstream
+-
+iomanip
+-
+vector
 -
 
 /Users/Mariana/Documents/GitHub/Trabalho-PROG/cross_words/board.h
