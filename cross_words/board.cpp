@@ -179,37 +179,51 @@ void Board::updateBoard(string location, string input)
 }
 
 
+//
+// ...
 bool Board::checkIfFull(unsigned int x, unsigned int y)
 {
-    for (unsigned int i = 0; i < x; ++i)
-        for (unsigned int j = 0; j < y; ++j)
+    for (unsigned int i = 0; i < x ; ++i)
+        for (unsigned int j = 0; j < y ; ++j)
             if (board[i][j] == '.')
                 return false;
     return true;
 }
 
+//
+// ..
 void Board::Finish(unsigned int x, unsigned int y)
 {
     unsigned int i, j;
     for (j = 0; j <= x - 1; j++)
         for (i = 0; i <= y - 1; i++)
-            if (board[i][j] == '.')
-                board[i][j] = '#';
+            if (board[i][j]   == '.')
+                board[i][j]   == '#';
 }
 
 
+//
+// ...
 void Board::Write(ofstream& file, string name, unsigned int x, unsigned int y, vector<string> &positions)
 {
-    file << name << endl << endl << x << endl << y << endl << endl;
-    for (int i = 0; i < x; i++)
+    file << name << endl << endl;
+   /* for (int i = 0; i < x; i++)
     {
         for (int j = 0; j < y; j++){
             file << board[i][j];
         file << endl;
         }
     }
-    /*for (auto it = positions.cbegin(); it != positions.cend(); ++it)
-    {
-        file << endl << this->board[0][0] << " " << this->board[x][y];
-    }*/
+*/
+    for (size_t i = 1; i < board.size(); i++) {
+        for (size_t j = 1; j < board.at(i).size(); j++)
+            file << board.at(i).at(j) << ' ';
+        file << endl;
+    }
+    file << endl;
+
+    for (size_t i = 0; i < positions.size(); i++)
+        for (size_t j = 0; j < positions.size(); j++)
+        file << positions.at(i).at(0) << positions.at(i).at(1) << positions.at(i).at(2)  <<   endl;
+    file.close();
 }
