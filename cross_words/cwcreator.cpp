@@ -258,7 +258,7 @@ void createBoard()
 	cout << endl;
 	b1.showBoard(x, y);
 
-	if (!cin.eof() && !b1.checkIfFull(x,y))
+	while (!cin.eof() && !b1.checkIfFull(x,y))
 	{
 
 		cout << endl;

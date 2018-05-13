@@ -183,9 +183,9 @@ void Board::updateBoard(string location, string input)
 // ...
 bool Board::checkIfFull(unsigned int x, unsigned int y)
 {
-    for (unsigned int i = 0; i < x ; ++i)
-        for (unsigned int j = 0; j < y ; ++j)
-            if (board[i][j] == '.')
+    for (unsigned int i = 0; i < board.size() ; ++i)
+        for (unsigned int j = 0; j < board.at(i).size() ; ++j)
+            if (board.at(i).at(j) == '.')
                 return false;
     return true;
 }
