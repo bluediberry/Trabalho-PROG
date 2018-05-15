@@ -1,0 +1,3 @@
+/Users/Mariana/Documents/GitHub/Trabalho-PROG/crosswords/cwcreator/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/Mariana/Documents/GitHub/Trabalho-PROG/crosswords/cwcreator/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/Mariana/Documents/GitHub/Trabalho-PROG/crosswords/cwcreator/cmake-build-debug/CMakeFiles/cwcreator.dir

@@ -1,4 +1,0 @@
-/Applications/CLion.app/Contents/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/Mariana/Documents/GitHub/Trabalho-PROG/cross_words
--- Configuring done
--- Generating done
--- Build files have been written to: /Users/Mariana/Documents/GitHub/Trabalho-PROG/cross_words/cmake-build-debug

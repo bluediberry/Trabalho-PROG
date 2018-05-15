@@ -1,8 +1,0 @@
-b001.txt
-
-R D 
-E R 
-
-AaV RE
-AaV DR
-
