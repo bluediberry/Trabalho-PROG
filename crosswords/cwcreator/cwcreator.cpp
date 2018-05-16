@@ -18,6 +18,8 @@ using namespace std;
 
 void createBoard();
 
+int exit();
+
 //==========================================================================================
 // Recieves the synonyms dictionary file name
 string filename(const string& s)
@@ -142,7 +144,7 @@ void save_board(Board &b1, unsigned int x, unsigned int y, vector<string> &posit
     cin.clear();
     cin.ignore(9999, '\n');
 
-
+    exit();
 }
 
 //==========================================================================================
@@ -342,28 +344,29 @@ void createBoard()
     switch (option) {
         case 1:
             save_board(b1 , x, y, positions, words);
+            exit();
             break;
         case 2:
             b1.Finish(x, y);
             save_board(b1, x, y, positions, words);
+            exit();
             break;
         case 3:
+            exit();
             return;
         case 4:
             createBoard();
+            exit();
             break;
     }
 }
 
 //==========================================================================================
 // Opens the board file
-void openBoard()
+void openBoard(string &filename, ifstream &f)
 {
-    string filename;
-    ifstream f;
 
-
-    do {
+        do {
 
         cout << "Board File ? ";
         getline(cin, filename);
@@ -380,68 +383,139 @@ void openBoard()
 
 //
 // ...
-void reloadBoard() {
+void reloadBoard(unsigned int &x, unsigned int &y, string &location, string &input, vector<string> &positions, vector<string> &words) {
 
-    string dFilename;
-    string bFilename;
-    string line;
-
-    vector<string> reloadContents;
+    string filename;
     ifstream f;
 
-    string location;
-    string input;
-    string filename;
-    vector<string> words;
-    vector<string> positions;
+    string dictFile;
+    ifstream dictionaryFile;
+    string saveFileName;
+    ofstream of;
+    int min = 0;
+    int max = 0;
+    string line;
+    bool unfinished = false;
 
-    unsigned int x;
-    unsigned int y;
-    //Get save Filename
-    do {
+    openBoard(filename, f);
 
-        cout << "Board File ? ";
-        getline(cin, filename);
+    while(getline(f, line))
+    {
+        static int lines = 0;
 
-        f.open(filename);
+        if(lines == 0)
+            dictFile = lines;
 
-        if (!f.is_open())
-        {
-            cerr << "Board File " << filename << " not found !\n";
-        }
-    } while (!f.is_open());
-    //Save all the contents of the file to a string vector
-    while (getline(f, line)) {
-        reloadContents.push_back(line);
+        if(line.size() == 0 && min == 0)
+            min = lines;
+
+        if(line.size() == 0 && min != 0 && max == 0)
+            max = lines - 1;
+
+        if(lines > 1)
+            if(line.find_first_of('.') != string::npos)
+                unfinished = true;
+
+        if(lines == 2) { y = line.length() / 2; }
+
+        if(line.length() > 0)
+            if(line.find('-') != string::npos)
+            {
+                positions.push_back(line.substr(0, line.find('-') - 1));
+                words.push_back(line.substr(line.find('-') + 2, line.length()));
+            }
+
+            lines++;
+
+
     }
 
-    //Rebuild dictionary
-    dFilename = reloadContents.at(1);
-    Dictionary rd1(f);
+    x = max - min;
+
+    f.clear();
+    dictionaryFile.clear();
+
+    if(unfinished)
+    openFile(dictFile, dictionaryFile);
+    Dictionary rd1(dictionaryFile);
 
 
-    //Reload the board and its user inputs
-    Board rb1(x, y);
-    rb1.reloadUserInputs(positions, location);
-    rb1.reloadBoard(positions, location, x, y);
-    if (rb1.checkIfFull(x, y)) {
-        cout << endl << "This board is already full" << endl;
+    Board rb1(x,y);
+
+
+    for (unsigned int i = 0; i < positions.size(); i++)
+    {
+        rb1.updateBoard(positions.at(i), words.at(i));
+    }
+
+
+   cout << endl;
+
+    if(unfinished) {
+
+        rb1.showBoard(x, y);
+        cin.ignore(99999, '\n');
         cin.clear();
-        cin.ignore();
-        cout << "Press 'Enter' to continue" << endl;
-        getchar();
-        return;
-    }
 
-    crosswords(location, input, rd1, rb1, words, positions, x, y);
+
+        while (!rb1.checkIfFull(x, y)) {
+
+            cout << endl;
+            crosswords(location, input, rd1, rb1, words, positions, x, y);
+
+        }
+
+
+        cin.ignore(10000);
+        cin.clear();
+        cout << endl;
+        cout << "============================" << endl;
+        cout << "        SAVE BOARD " << endl;
+        cout << "============================" << endl << endl;
+        cout << "1) Save to complete later." << endl;
+        cout << "2) Save and finish." << endl;
+        cout << "3) Do not save." << endl;
+        cout << "4) Do not save and Restart" << endl;
+        cin.ignore(10000);
+        cin.clear();
+
+
+        int option;
+        cin >> option;
+
+        while (option > 4 || option < 1) {
+            cin.ignore(10, '\n');
+            cin.clear();
+
+            cout << "Invalid option! Try again." << endl;
+            cin >> option;
+        }
+        switch (option) {
+            case 1:
+                save_board(rb1, x, y, positions, words);
+                exit();
+                break;
+            case 2:
+                rb1.Finish(x, y);
+                save_board(rb1, x, y, positions, words);
+                exit();
+                break;
+            case 3:
+                exit();
+                return;
+            case 4:
+                createBoard();
+                exit();
+                break;
+        }
+    }
 
 }
 
-/*Board resumeBoard() {
 
-    Board rb1;
-
-}*/
+int exit() {
+    exit(0);
+}
 
 //==========================================================================================
 // Shows the available options of the program
@@ -449,6 +523,8 @@ int main() {
     string filename;
     ifstream f;
     unsigned int option;
+    string location;
+    string input;
     vector<string> words;
     vector<string> positions;
     unsigned int x, y;
@@ -489,7 +565,7 @@ int main() {
             break;
 
         case 2:
-            reloadBoard();
+            reloadBoard(x, y, location, input, positions, words);
             break;
 
         default:

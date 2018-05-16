@@ -1,8 +1,13 @@
 B003.TXT
 
-. . . . . 
-. . . . . 
-. . . . . 
-. . . . . 
-. . . . . 
+I N S U L T 
+N # H A R D 
+C . . # . . 
+O . . J . . 
+M . . O . . 
+E . . Y . . 
 
+AaH - INCOME
+AaV - INSULT
+BcH - HARD
+DdV - JOY

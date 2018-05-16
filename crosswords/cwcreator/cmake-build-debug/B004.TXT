@@ -1,0 +1,10 @@
+B004.TXT
+
+W B B . 
+E R O . 
+A A L . 
+K Y D . 
+
+AaV - WEAK
+AbV - BRAY
+AcV - BOLD

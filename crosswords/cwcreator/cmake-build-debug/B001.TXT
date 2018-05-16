@@ -1,11 +1,8 @@
 B001.TXT
 
-S F P A 
-T A A L 
-A S T L 
-B T H # 
+. . . . . 
+. . . . . 
+. . . . . 
+. . . . . 
+. . . . . 
 
-AaV - STAB
-AbV - FAST
-AcV - PATH
-AdV - ALL

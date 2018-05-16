@@ -1,0 +1,11 @@
+B005.TXT
+
+S T I C K 
+L . . . . 
+A G E N T 
+V . . . . 
+E . . . . 
+
+AaH - STICK
+AaV - SLAVE
+CaH - AGENT

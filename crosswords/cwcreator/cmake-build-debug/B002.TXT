@@ -1,13 +1,9 @@
 B002.TXT
 
-E K E Y 
-R E V E 
-R E E T 
-# P N # 
+R A L L Y 
+. . . . . 
+. . . . . 
+. . . . . 
+. . . . . 
 
-AaH EKE
-AaV ERR
-AbH KEY
-AbV KEEP
-AcV EVEN
-AdV YET
+AaH - RALLY
