@@ -6,9 +6,25 @@
 
 #IncludeRegexTransform: 
 
+/Users/Mariana/Documents/GitHub/Trabalho-PROG/crosswords/cwcreator/Dictionary.h
+iostream
+-
+string
+-
+vector
+-
+map
+-
+algorithm
+-
+set
+-
+
 /Users/Mariana/Documents/GitHub/Trabalho-PROG/crosswords/cwcreator/board.cpp
 board.h
 /Users/Mariana/Documents/GitHub/Trabalho-PROG/crosswords/cwcreator/board.h
+Dictionary.h
+/Users/Mariana/Documents/GitHub/Trabalho-PROG/crosswords/cwcreator/Dictionary.h
 iomanip
 -
 map
@@ -41,6 +57,8 @@ string
 -
 vector
 -
+dictionary.h
+/Users/Mariana/Documents/GitHub/Trabalho-PROG/crosswords/cwcreator/dictionary.h
 
 /Users/Mariana/Documents/GitHub/Trabalho-PROG/crosswords/cwcreator/cwcreator.cpp
 iostream

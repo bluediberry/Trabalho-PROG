@@ -1,4 +1,5 @@
 #include "board.h"
+#include "Dictionary.h"
 #include <iomanip>
 #include <map>
 #include <iostream>
@@ -44,6 +45,13 @@ void setcolor(string color, const string background_color)
 }
 
 
+Board::Board() {};
+
+
+/*void Board::setDictionary(const Dictionary& name)
+{
+	synonyms = name;
+}*/
 
 //==========================================================================================
 // layout of the board
@@ -68,6 +76,7 @@ Board::Board(unsigned int x, unsigned int y)
 
 	}
 
+
 void Board::reloadBoard(vector<string> &positions, string &location, unsigned int x, unsigned int y) {
 
     string line;
@@ -80,14 +89,14 @@ void Board::reloadBoard(vector<string> &positions, string &location, unsigned in
     x = positions.at(2).length() / 2;
     Board(x, y);
 
-  /*  //Reload board using saved user inputs
-    for (size_t i = 0; i < positions.size(); i++) {
+    //Reload board using saved user inputs
+   /* for (size_t i = 0; i < positions.size(); i++) {
         string posDir = location.at(i);
         string word = location.at(i).at(1);
 
         updateBoard(posDir, word);
-    }*/
-
+    }
+*/
     showBoard(x, y);
 }
 
@@ -138,6 +147,11 @@ void Board::reloadUserInputs( vector<string> &positions, string &location) {
     }
 }
 
+
+void Board::reloadBoard(ifstream &file) {
+
+}
+
 //==========================================================================================
 // Displays the board
 void Board::showBoard(unsigned int x, unsigned int y)
@@ -166,6 +180,9 @@ void Board::showBoard(unsigned int x, unsigned int y)
   	}
   	setcolor(LIGHTBLUE, LIGHTBLUE);
 }
+
+
+
 
 //==========================================================================================
 // Checks the board to see if a certain word fits in the desired location

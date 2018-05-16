@@ -16,6 +16,8 @@
 
 using namespace std;
 
+void createBoard();
+
 //==========================================================================================
 // Recieves the synonyms dictionary file name
 string filename(const string& s)
@@ -149,8 +151,47 @@ void crosswords(string &location, string &input, Dictionary &d1, Board &b1, vect
 {
     vector<string> fittingWords;
     int numberOfFittingWords;
+
+    cin.ignore(99999, '\n');
     cout << "Position ( LCD / CTRL-Z = stop ) ? ";
     cin >> location;
+
+        if (location == "CTRL-Z")
+        {
+            cin.clear();
+            cin.ignore(9999, '\n');
+            cout << "============================" << endl;
+            cout << "        SAVE BOARD " << endl;
+            cout << "============================" << endl << endl;
+            cout << "1) Save to complete later." << endl;
+            cout << "2) Save and finish." << endl;
+            cout << "3) Do not save." << endl;
+            cout << "4) Do not save and Restart" << endl;
+            int option;
+            cin >> option;
+            while (option > 4 || option < 1 || cin.fail() || cin.eof()) {
+                cin.clear();
+                cin.ignore(10, '\n');
+                cout << "Invalid option! Try again." << endl;
+                cin >> option;
+                }
+            switch (option) {
+                case 1:
+                    save_board(b1, x, y, positions, words);
+                    break;
+                case 2:
+                    b1.Finish(x, y);
+                    save_board(b1, x, y, positions, words);
+                    break;
+                case 3:
+                    return;
+                case 4:
+                    createBoard();
+                    break;
+            }
+        }
+
+
     while (!isupper(location.at(0)) || isupper(location.at(1)) || (location.at(2) != 'H' && location.at(2) != 'V')) {
         cout << endl
              << "Please type the first letter in upper case, the second letter in lower case and the third letter as either 'H' or 'V'."
@@ -159,6 +200,8 @@ void crosswords(string &location, string &input, Dictionary &d1, Board &b1, vect
         cin.ignore(99999, '\n');
         cout << "Position ( LCD / CTRL-Z = stop ) ? ";
         cin >> location;
+        if (location != "CTRL-Z")
+            return;
     }
     if (cin) {
         cout << "Word ( - = remove / ? = help ) ..? ";
@@ -218,13 +261,12 @@ void crosswords(string &location, string &input, Dictionary &d1, Board &b1, vect
                     b1.updateBoard(location, input);
                     cout << endl;
                     b1.showBoard(x, y);
-                }
-                else
-                {
+                } else {
                     cout << endl << "Please choose a word that is possible to place." << endl;
                 }
         }
     }
+
 }
 
 //==========================================================================================
@@ -265,9 +307,17 @@ void createBoard()
             crosswords(location, input, d1, b1, words, positions, x, y);
 
         }
-    
+
+  /* if(cin.fail()) {
+        if(!cin.eof())
+            cin.ignore(1000,  '\n');
+        cin.clear();
+    }
+*/
+
+    cin.ignore(10000);
     cin.clear();
-    cin.ignore(9999, '\n');
+    cout << endl;
     cout << "============================" << endl;
     cout << "        SAVE BOARD " << endl;
     cout << "============================" << endl << endl;
@@ -275,11 +325,17 @@ void createBoard()
     cout << "2) Save and finish." << endl;
     cout << "3) Do not save." << endl;
     cout << "4) Do not save and Restart" << endl;
+    cin.ignore(10000);
+    cin.clear();
+
+
     int option;
     cin >> option;
-    while (option > 4 || option < 1 || cin.fail() || cin.eof()) {
-        cin.clear();
+
+    while (option > 4 || option < 1) {
         cin.ignore(10, '\n');
+        cin.clear();
+
         cout << "Invalid option! Try again." << endl;
         cin >> option;
     }
@@ -298,7 +354,6 @@ void createBoard()
             break;
     }
 }
-
 
 //==========================================================================================
 // Opens the board file
@@ -381,6 +436,12 @@ void reloadBoard() {
     crosswords(location, input, rd1, rb1, words, positions, x, y);
 
 }
+
+/*Board resumeBoard() {
+
+    Board rb1;
+
+}*/
 
 //==========================================================================================
 // Shows the available options of the program
