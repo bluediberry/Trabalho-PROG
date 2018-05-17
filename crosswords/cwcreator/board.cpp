@@ -44,14 +44,64 @@ void setcolor(string color, const string background_color)
     cout << color << background_color;
 }
 
-
-Board::Board() {};
-
-
-/*void Board::setDictionary(const Dictionary& name)
+//==========================================================================================
+// Checks to see if all the words present on the board are valid
+bool Board::CheckBoard(unsigned int x, unsigned int y, Board b1, Dictionary d1)
 {
-	synonyms = name;
-}*/
+    string word;
+
+    for (unsigned int i = 1; i < x + 1; i++)
+    {
+        word = "";
+
+        for (unsigned int j = 1; j < y + 1; j++)
+        {
+            char c = b1.getBoard(i, j);
+            if (isupper(c))
+            {
+                word = word + c;
+            }
+            if (c == '#' || j == y || c == '.')
+            {
+                if (word != "" && word.size() > 1 && !d1.isInDictionary(word))
+                    return false;
+                word  = "";
+            }
+        }
+    }
+
+    for (unsigned int k = 1; k < y + 1; k++)
+    {
+
+        word = "";
+
+        for (unsigned int l = 1; l < x + 1; l++)
+        {
+
+            char c = b1.getBoard(l, k);
+            if (isupper(c))
+            {
+                word = word + c;
+            }
+            if (c == '#' || l == x || c == '.')
+            {
+                if (!d1.isInDictionary(word) && word != "" && word.size() > 1)
+                    return false;
+                word = "";
+            }
+        }
+    }
+
+    return true;
+
+}
+
+//==========================================================================================
+// Returns a board
+char Board::getBoard(unsigned int x, unsigned int y) {
+    return this->board[x][y];
+};
+
 
 //==========================================================================================
 // layout of the board
@@ -75,79 +125,6 @@ Board::Board(unsigned int x, unsigned int y)
 	this->board = tempBoard;
 
 	}
-
-
-void Board::reloadBoard(vector<string> &positions, string &location, unsigned int x, unsigned int y) {
-
-    string line;
-    string wordTemp;
-
-    //Get number of lines and columns of saved board
-    for (size_t i = 2; i < positions.size(); i++)
-        if (positions.at(i).empty())
-            y = i - 2;
-    x = positions.at(2).length() / 2;
-    Board(x, y);
-
-    //Reload board using saved user inputs
-   /* for (size_t i = 0; i < positions.size(); i++) {
-        string posDir = location.at(i);
-        string word = location.at(i).at(1);
-
-        updateBoard(posDir, word);
-    }
-*/
-    showBoard(x, y);
-}
-
-//
-//Load user inputs from file to 2D string vector
-void Board::reloadUserInputs( vector<string> &positions, string &location) {
-
-    string tempWord;
-    vector<string> tempWordVector;
-    unsigned int spaceCounter = 0;
-    unsigned int startingPos;
-
-    //Get the starting position of the user inputs segment of the file
-    for (size_t i = 0; i < positions.size(); i++) {
-        if (positions.at(i).empty())
-            spaceCounter++;
-        if (spaceCounter == 2) {
-            startingPos = ++i;
-            break;
-        }
-    }
-
-    //Load user inputs to 2D vector
-    for (size_t i = startingPos; i < positions.size(); i++) {
-        for (size_t j = 0; j < positions.at(i).length(); j++) {
-            if (j == positions.at(i).length() - 1) {
-                tempWord = tempWord + positions.at(i)[j];
-                tempWordVector.push_back(tempWord);
-                tempWord = "";
-                break;
-            }
-
-            if (positions.at(i)[j] != ' ')
-                tempWord = tempWord + positions.at(i)[j];
-            else {
-
-                tempWordVector.push_back(tempWord);
-                tempWord = "";
-
-            }
-        }
-        for (int i = startingPos; i < positions.size(); i++) {
-            for (int j = 0; j < positions.at(i).length(); j++) {
-                updateBoard(location, tempWord);
-                tempWordVector.resize(0);
-            }
-        }
-    }
-}
-
-
 
 
 //==========================================================================================
@@ -178,8 +155,6 @@ void Board::showBoard(unsigned int x, unsigned int y)
   	}
   	setcolor(LIGHTBLUE, LIGHTBLUE);
 }
-
-
 
 
 //==========================================================================================

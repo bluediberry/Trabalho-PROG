@@ -32,14 +32,13 @@ bool isValid(string word)
 	return false;
 }
 
-//
-// ...
+//==========================================================================================
+// Converts the input word into an uppercase one
 void uppercasel(string &word)
 {
 	for (unsigned int i = 0; i < word.length(); ++i)
 		word[i] = toupper(word[i]);
 }
-
 
 //==========================================================================================
 // Treatment of the dictionary file
@@ -74,24 +73,23 @@ Dictionary::Dictionary(ifstream &f)
 			}
 
 		}
-		words.insert(pair<string, vector<string> > (word, synonyms));
+		words.insert(pair<string, vector<string>>(word, synonyms));
 		possibleWords.push_back(word);
 	}
-}
-
-
-//==========================================================================================
-// Returns the numbers of words in the dictionary
-int Dictionary::nWords()
-{
-	return possibleWords.size();
 }
 
 //==========================================================================================
 // Returns a list of all the words in the dictionary in a certain position
 string Dictionary::wordsList(unsigned int i)
 {
-	return possibleWords[i];
+    return possibleWords[i];
+}
+
+//==========================================================================================
+// Returns the numbers of words in the dictionary
+int Dictionary::nWords()
+{
+	return possibleWords.size();
 }
 
 //==========================================================================================

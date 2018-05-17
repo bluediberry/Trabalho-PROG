@@ -1,6 +1,7 @@
 
 #ifndef BOARD_H
 #define BOARD_H
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -16,16 +17,72 @@ public:
      * @param str texto a procurar
      * @return se encontrou texto
      */
-	Board();
-	Board(unsigned int x, unsigned int y);
-    void reloadUserInputs(vector<string> &positions, string &location);
-    void reloadBoard(vector<string> &positions, string &location, unsigned int x, unsigned int y);
-	void reloadBoard(ifstream& file);
+    char getBoard(unsigned int x, unsigned int y);
+
+
+    /*
+ * funcao faz x
+ * @param str texto a procurar
+ * @return se encontrou texto
+ */
+    bool CheckBoard(unsigned int x, unsigned int y, Board b1, Dictionary d1);
+
+
+    /*
+ * funcao faz x
+ * @param str texto a procurar
+ * @return se encontrou texto
+ */
+    Board(unsigned int x, unsigned int y);
+
+
+
+
+    /*
+ * funcao faz x
+ * @param str texto a procurar
+ * @return se encontrou texto
+ */
 	void updateBoard(string location, string input);
+
+
+    /*
+ * funcao faz x
+ * @param str texto a procurar
+ * @return se encontrou texto
+ */
 	void showBoard(unsigned int x, unsigned int y);
+
+
+    /*
+ * funcao faz x
+ * @param str texto a procurar
+ * @return se encontrou texto
+ */
 	bool wordFits(string location, string input);
+
+
+    /*
+ * funcao faz x
+ * @param str texto a procurar
+ * @return se encontrou texto
+ */
     bool checkIfFull(unsigned int x, unsigned int y);
+
+
+    /*
+ * funcao faz x
+ * @param str texto a procurar
+ * @return se encontrou texto
+ */
     void Finish(unsigned int x, unsigned int y);
+
+
+    /*
+ * funcao faz x
+ * @param str texto a procurar
+ * @return se encontrou texto
+ */
 	void Write(ofstream& file, string name, unsigned int x, unsigned int y, vector<string> &positions, vector<string> &words);
 
 private:

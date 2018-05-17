@@ -2,15 +2,9 @@
 // Contains the main functions for the console application
 #include <iostream>
 #include <fstream>
-#include <stdio.h>
 #include <iomanip>
-#include <string>
 #include <vector>
-#include <cstdlib>
 #include <map>
-#include <ctype.h>
-#include <ctime>
-#include <sstream>
 #include "dictionary.h"
 #include "board.h"
 
@@ -84,7 +78,7 @@ void getSuggestion(string &location, Dictionary &d1, Board &b1, vector<string> &
 
     srand(time(NULL));
     if (fittingWords.size() == 0)
-        cout << "No words fit in that location." << endl;
+        cout << "There are no available words that fit in that location" << endl;
     else
     {
         if (fittingWords.size() >= 5)
@@ -136,10 +130,10 @@ void save_board(Board &b1, unsigned int x, unsigned int y, vector<string> &posit
     of.open(oname);
     if (of.fail())
     {
-        cerr << "Error opening file" << endl;
+        cerr << "Error in opening file" << endl;
         exit(3);
     }
-    cout << "Writing file " << oname << "." << endl;
+    cout << "Writing to file " << oname << "." << endl;
     b1.Write(of, oname, x, y, positions, words);
     cin.clear();
     cin.ignore(9999, '\n');
@@ -211,13 +205,13 @@ void crosswords(string &location, string &input, Dictionary &d1, Board &b1, vect
         {
             cin.clear();
             cin.ignore(9999, '\n');
-            cout << "============================" << endl;
-            cout << "        SAVE BOARD " << endl;
-            cout << "============================" << endl << endl;
-            cout << "1) Save to complete later." << endl;
-            cout << "2) Save and finish." << endl;
-            cout << "3) Do not save." << endl;
-            cout << "4) Do not save and Restart" << endl;
+            cout << "=============================================" << endl;
+            cout << "                 SAVE BOARD " << endl;
+            cout << "=============================================" << endl << endl;
+            cout << "[1] Save to complete later." << endl;
+            cout << "[2] Save and finish." << endl;
+            cout << "[3] Do not save." << endl;
+            cout << "[4] Do not save and Restart" << endl;
             int option;
             cin >> option;
             while (option > 4 || option < 1 || cin.fail() || cin.eof()) {
@@ -229,15 +223,19 @@ void crosswords(string &location, string &input, Dictionary &d1, Board &b1, vect
             switch (option) {
                 case 1:
                     save_board(b1, x, y, positions, words);
+                    exit();
                     break;
                 case 2:
                     b1.Finish(x, y);
                     save_board(b1, x, y, positions, words);
+                    exit();
                     break;
                 case 3:
-                    return;
+                    exit();
+                    break;
                 case 4:
                     createBoard();
+                    exit();
                     break;
             }
         }
@@ -333,11 +331,15 @@ void createBoard()
 	vector<string> words;
 	vector<string> positions;
 
+	cout << "                 CREATE BOARD" << endl;
+    cout << "=============================================" << endl;
 
-	cout << "CREATE PUZZLE" << endl;
-	cout << "-------------------------------------------" << endl;
+    cin.ignore(1000,  '\n');
+    cin.clear();
+
 	openFile(filename, f);
 	Dictionary d1(f);
+
 	cout << "Board size (lines columns) ? ";
 	cin >> x >> y;
 	while ((x > 26 || y > 26) || (x <= 0 || y <= 0))
@@ -359,41 +361,35 @@ void createBoard()
 
         }
 
-  /* if(cin.fail()) {
+
+   if(cin.fail()) {
         if(!cin.eof())
             cin.ignore(1000,  '\n');
         cin.clear();
     }
-*/
 
 
-    cin.ignore(10000);
+
     cin.clear();
-    cout << endl;
-    cout << "============================" << endl;
-    cout << "        SAVE BOARD " << endl;
-    cout << "============================" << endl << endl;
-    cout << "1) Save to complete later." << endl;
-    cout << "2) Save and finish." << endl;
-    cout << "3) Do not save." << endl;
-    cout << "4) Do not save and Restart" << endl;
-    cin.ignore(10000);
-    cin.clear();
-
-
+    cin.ignore(9999, '\n');
+    cout << "=============================================" << endl;
+    cout << "                 SAVE BOARD " << endl;
+    cout << "=============================================" << endl << endl;
+    cout << "[1] Save to complete later." << endl;
+    cout << "[2] Save and finish." << endl;
+    cout << "[3] Do not save." << endl;
+    cout << "[4] Do not save and Restart" << endl;
     int option;
     cin >> option;
-
-    while (option > 4 || option < 1) {
-        cin.ignore(10, '\n');
+    while (option > 4 || option < 1 || cin.fail() || cin.eof()) {
         cin.clear();
-
+        cin.ignore(10, '\n');
         cout << "Invalid option! Try again." << endl;
         cin >> option;
     }
     switch (option) {
         case 1:
-            save_board(b1 , x, y, positions, words);
+            save_board(b1, x, y, positions, words);
             exit();
             break;
         case 2:
@@ -403,7 +399,7 @@ void createBoard()
             break;
         case 3:
             exit();
-            return;
+            break;
         case 4:
             createBoard();
             exit();
@@ -418,7 +414,7 @@ void openBoard(string &filename, ifstream &f)
 
         do {
 
-        cout << "Board File ? ";
+        cout << "Board File Name? ";
         getline(cin, filename);
 
         f.open(filename);
@@ -431,8 +427,8 @@ void openBoard(string &filename, ifstream &f)
 }
 
 
-//
-// ...
+//==========================================================================================
+// Read from a preexisting board text file and reloads the board onto the screen
 void reloadBoard(unsigned int &x, unsigned int &y, string &location, string &input, vector<string> &positions, vector<string> &words) {
 
     string filename;
@@ -446,6 +442,13 @@ void reloadBoard(unsigned int &x, unsigned int &y, string &location, string &inp
     int max = 0;
     string line;
     bool unfinished = false;
+
+
+    cout << "               RELOAD BOARD" << endl;
+    cout << "=============================================" << endl;
+
+    cin.ignore(1000,  '\n');
+    cin.clear();
 
     openBoard(filename, f);
 
@@ -484,7 +487,8 @@ void reloadBoard(unsigned int &x, unsigned int &y, string &location, string &inp
 
     f.clear();
     dictionaryFile.clear();
-
+    cin.ignore(1000,  '\n');
+    cin.clear();
     if(unfinished)
     openFile(dictFile, dictionaryFile);
     Dictionary rd1(dictionaryFile);
@@ -492,11 +496,11 @@ void reloadBoard(unsigned int &x, unsigned int &y, string &location, string &inp
 
     Board rb1(x,y);
 
-
-    for (unsigned int i = 0; i < positions.size(); i++)
-    {
+    for (unsigned int i = 0; i < positions.size(); i++) {
         rb1.updateBoard(positions.at(i), words.at(i));
     }
+
+
 
 
    cout << endl;
@@ -504,70 +508,74 @@ void reloadBoard(unsigned int &x, unsigned int &y, string &location, string &inp
     if(unfinished) {
 
         rb1.showBoard(x, y);
-        cin.ignore(99999, '\n');
+
+        do {
+
+            cin.ignore(1000, '\n');
+            cin.clear();
+
+
+            while (!cin.eof() && !rb1.checkIfFull(x, y)) {
+
+                cout << endl;
+                crosswords(location, input, rd1, rb1, words, positions, x, y);
+
+            }
+
+            if(!rb1.CheckBoard(x, y, rb1, rd1)) {
+
+                cout << "This board can't be finished because it contains invalid words." << endl;
+            }
+
+        } while(!rb1.CheckBoard(x, y, rb1, rd1));
+
+
+        cin.ignore(1000,  '\n');
         cin.clear();
 
-
-        while (!cin.eof()  && !rb1.checkIfFull(x, y)) {
-
-            cout << endl;
-            crosswords(location, input, rd1, rb1, words, positions, x, y);
-
+        cout << "=============================================" << endl;
+        cout << "                 SAVE BOARD " << endl;
+        cout << "=============================================" << endl << endl;
+        cout << "[1] Save to complete later." << endl;
+        cout << "[2] Save and finish." << endl;
+        cout << "[3] Do not save." << endl;
+        int option;
+        cin >> option;
+        while (option > 3 || option < 1 || cin.fail() || cin.eof()) {
+            cin.clear();
+            cin.ignore(10, '\n');
+            cout << "Invalid option! Try again." << endl;
+            cin >> option;
         }
-
-             cin.ignore(10000);
-             cin.clear();
-             cout << endl;
-             cout << "============================" << endl;
-             cout << "        SAVE BOARD " << endl;
-             cout << "============================" << endl << endl;
-             cout << "1) Save to complete later." << endl;
-             cout << "2) Save and finish." << endl;
-             cout << "3) Do not save." << endl;
-             cout << "4) Do not save and Restart" << endl;
-             cin.ignore(10000);
-             cin.clear();
-
-
-             int option;
-             cin >> option;
-
-             while (option > 4 || option < 1) {
-                 cin.ignore(10, '\n');
-                 cin.clear();
-
-                 cout << "Invalid option! Try again." << endl;
-                 cin >> option;
-             }
-             switch (option) {
-                 case 1:
-                     save_board(rb1, x, y, positions, words);
-                     exit();
-                     break;
-                 case 2:
-                     rb1.Finish(x, y);
-                     save_board(rb1, x, y, positions, words);
-                     exit();
-                     break;
-                 case 3:
-                     exit();
-                     return;
-                 case 4:
-                     createBoard();
-                     exit();
-                     break;
-             }
+        switch (option) {
+            case 1:
+                save_board(rb1, x, y, positions, words);
+                exit();
+                break;
+            case 2:
+                rb1.Finish(x, y);
+                save_board(rb1, x, y, positions, words);
+                exit();
+                break;
+            case 3:
+                exit();
+                break;
+        }
          }
-
+    else
+    {
+        rb1.Finish(x, y);
+        rb1.showBoard(x, y);
+        cout << "This Board is already completed" << endl;
+    }
 }
 
 
-//
-// ...
+//==========================================================================================
+// Terminates the program
 int exit() {
     exit(0);
 }
-
 
 
 //==========================================================================================
@@ -582,22 +590,24 @@ int main() {
     vector<string> positions;
     unsigned int x, y;
 
-    cout << "CROSSWORDS PUZZLE CREATOR" << endl;
+    cout << "=============================================" << endl;
+    cout << "          CROSSWORDS PUZZLE CREATOR" << endl;
     cout << "=============================================" << endl << endl;
     cout << "INSTRUCTIONS: " << endl << endl;
-    cout
-            << "The objetive of this Crosswords puzzle creator is to allow you to create a new puzzle from scratch and save it, so that then you can complete it in your own time."
-            << endl;
+    cout << "================================================" << endl;
+    cout << "The objetive of this Crosswords puzzle creator is to allow you to create a new board puzzle from scratch" << endl;
+    cout << "and save it, so that then you can complete it in your own time." << endl;
     cout << "In order to do this you start by defining: " << endl;
-    cout << "-> The number of rows and columns you want your board to have" << endl;
-    cout << "-> The position of the first letter of the word you want to insert on the board." << endl;
+    cout << "[1] The number of rows and columns you want your board to have" << endl;
+    cout << "[2] The position of the first letter of the word you want to insert on the board:" << endl;
     cout << "Position ( LCD / Crtz-Z = Stop)" << endl;
     cout << "LCD stands for Line Column and Direction, and they are introduced in that order." << endl;
-    cout << "----------------------------------------------" << endl;
+    cout << "=============================================" << endl;
     cout << "OPTIONS: " << endl;
-    cout << "1 - Create Puzzle " << endl;
-    cout << "2 - Resume Puzzle " << endl;
-    cout << "0 - Exit " << endl;
+    cout << "=============================================" << endl;
+    cout << "[1] Create Puzzle " << endl;
+    cout << "[2] Resume Puzzle " << endl;
+    cout << "[0] Exit " << endl;
     cout << "Option ?" << endl;
     cin >> option;
 
@@ -610,7 +620,7 @@ int main() {
         cin.ignore(9999, '\n');
     }
 
-    cout << "-------------------------------------------" << endl;
+    cout << "=============================================" << endl;
 
     switch (option) {
         case 1:
