@@ -1,11 +1,10 @@
-B001.TXT
+b001.txt
 
-S F P A 
-T A A L 
-A S T L 
-B T H # 
+C # # # # # 
+O # # # # # 
+I # # # # # 
+N # # # # # 
+# # # # # # 
+# # # # # # 
 
-AaV - STAB
-AbV - FAST
-AcV - PATH
-AdV - ALL
+AaV - COIN

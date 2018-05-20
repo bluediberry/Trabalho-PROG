@@ -1,13 +1,13 @@
-B002.TXT
+b002.txt
 
-E K E Y 
-R E V E 
-R E E T 
-# P N # 
+. . . . # . . 
+L I M P I D # 
+. . . . N . . 
+. . . . F . . 
+. . . . O . . 
+H O N O R # . 
+. . . . M . . 
 
-AaH EKE
-AaV ERR
-AbH KEY
-AbV KEEP
-AcV EVEN
-AdV YET
+BaH - LIMPID
+BeV - INFORM
+FaH - HONOR

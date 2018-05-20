@@ -13,8 +13,8 @@ using namespace std;
 class Player
 {
 public:
-    void setName(string name);
     string getName();
+    Player(const string& name);
     int getAlternativeClues();
     double getElapsedTime();
     void incrementAltClues();
@@ -29,7 +29,7 @@ public:
 
 private:
 
-    string name = "";
+    string player_name = "";
     time_t start;
     time_t end;
     int altClues = 0;

@@ -8,16 +8,20 @@
 
 using namespace std;
 
-//
-// ...
-void Player::setName(string name) {
-    Player::name = name;
-}
+
 
 //
 // ...
 string Player::getName() {
-    return Player::name;
+    return player_name;
+}
+
+//
+// ...
+Player::Player(const string& name)
+{
+    player_name = name;
+    altClues = 0;
 }
 
 //
