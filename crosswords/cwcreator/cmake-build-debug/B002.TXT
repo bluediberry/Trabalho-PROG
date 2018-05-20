@@ -1,9 +1,13 @@
-B002.TXT
+b002.txt
 
-R A L L Y 
-. . . . . 
-. . . . . 
-. . . . . 
-. . . . . 
+. . . . # . . 
+L I M P I D # 
+. . . . N . . 
+. . . . F . . 
+. . . . O . . 
+H O N O R # . 
+. . . . M . . 
 
-AaH - RALLY
+BaH - LIMPID
+BeV - INFORM
+FaH - HONOR

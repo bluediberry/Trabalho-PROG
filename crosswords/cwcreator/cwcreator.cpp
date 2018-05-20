@@ -252,6 +252,7 @@ void crosswords(string &location, string &input, Dictionary &d1, Board &b1, vect
         if (location != "CTRL-Z")
             return;
     }
+
     if (cin) {
         cout << "Word ( - = remove / ? = help ) ..? ";
         cin >> input;
@@ -290,7 +291,7 @@ void crosswords(string &location, string &input, Dictionary &d1, Board &b1, vect
         if (input == "?")
             if (numberOfFittingWords == 0);
             else {
-                if (input != "-")
+                if (input != "-") {
                     if (b1.wordFits(location, input) && find(words.begin(), words.end(), input) == words.end()) {
                         positions.push_back(location);
                         words.push_back(input);
@@ -300,20 +301,23 @@ void crosswords(string &location, string &input, Dictionary &d1, Board &b1, vect
                     } else {
                         cout << endl << "Please choose a word that is possible to place." << endl;
                     }
-            }
-        else {
-
-            if (input != "-")
-                if (b1.wordFits(location, input) && find(words.begin(), words.end(), input) == words.end()) {
-                    positions.push_back(location);
-                    words.push_back(input);
-                    b1.updateBoard(location, input);
-                    cout << endl;
-                    b1.showBoard(x, y);
-                } else {
-                    cout << endl << "Please choose a word that is possible to place." << endl;
                 }
-        }
+            }
+            else {
+
+                if (input != "-") {
+                    if (b1.wordFits(location, input) && find(words.begin(), words.end(), input) == words.end()) {
+                        positions.push_back(location);
+                        words.push_back(input);
+                        b1.updateBoard(location, input);
+                        cout << endl;
+                        b1.showBoard(x, y);
+                    } else {
+                        cout << endl << "Please choose a word that is possible to place." << endl;
+                    }
+                }
+            }
+
     }
 
 }
