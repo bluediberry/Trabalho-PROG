@@ -7,6 +7,7 @@
 #include <map>
 #include "dictionary.h"
 #include "board.h"
+#include <sstream>
 
 using namespace std;
 
@@ -125,16 +126,23 @@ void openFile(string &filename, ifstream &f)
 // Saves a complete or incomplete board into a text file
 void save_board(Board &b1, unsigned int x, unsigned int y, vector<string> &positions, vector<string> &words)
 {
-    string oname = filename("Board");
+
+    static unsigned int boardnr = 0;
+    boardnr++;
     ofstream of;
-    of.open(oname);
+
+    stringstream filenameb;
+    filenameb << setw(3) << setfill('0') << boardnr;
+    string filename = "b" + filenameb.str() + ".txt";
+    of.open(filename);
     if (of.fail())
     {
         cerr << "Error in opening file" << endl;
         exit(3);
     }
-    cout << "Writing to file " << oname << "." << endl;
-    b1.Write(of, oname, x, y, positions, words);
+    cout << "Writing to file " << filename << "." << endl;
+
+    b1.Write(of, filename, x, y, positions, words);
     cin.clear();
     cin.ignore(9999, '\n');
 

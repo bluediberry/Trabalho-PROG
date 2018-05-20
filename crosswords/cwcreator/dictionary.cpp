@@ -45,12 +45,12 @@ void uppercasel(string &word)
 Dictionary::Dictionary(ifstream &f)
 {
 	string line;
-	vector<string> emptyVec;
+	vector<string> newVector;
 
 	while (getline(f, line))
 	{
 		uppercasel(line);
-		vector<string> synonyms;
+		vector<string> snnm;
 		string word = line.substr(0, line.find_first_of(':'));
 		string synonym = line.substr(line.find_first_of(':') + 2, line.length());
 
@@ -59,7 +59,7 @@ Dictionary::Dictionary(ifstream &f)
 
 			if (isValid(synonym.substr(0, synonym.find_first_of(','))))
 			{
-				synonyms.push_back(synonym.substr(0, synonym.find_first_of(',')));
+                snnm.push_back(synonym.substr(0, synonym.find_first_of(',')));
 			}
 			if (synonym.length() <= synonym.find(',') + 1)
 				break;
@@ -69,12 +69,12 @@ Dictionary::Dictionary(ifstream &f)
 		{
 			if (isValid(synonym))
 			{
-				synonyms.push_back(synonym);
+                snnm.push_back(synonym);
 			}
 
 		}
-		words.insert(pair<string, vector<string>>(word, synonyms));
-		possibleWords.push_back(word);
+		words.insert(pair<string, vector<string>>(word, snnm));
+		validWords.push_back(word);
 	}
 }
 
@@ -82,14 +82,14 @@ Dictionary::Dictionary(ifstream &f)
 // Returns a list of all the words in the dictionary in a certain position
 string Dictionary::wordsList(unsigned int i)
 {
-    return possibleWords[i];
+    return validWords[i];
 }
 
 //==========================================================================================
 // Returns the numbers of words in the dictionary
 int Dictionary::nWords()
 {
-	return possibleWords.size();
+	return validWords.size();
 }
 
 //==========================================================================================

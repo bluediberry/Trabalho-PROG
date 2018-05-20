@@ -1,18 +1,10 @@
 b001.txt
 
-S I Z E # A 
-U N D O # S 
-F A L S E S 
-F I X # A I 
-E B B # S G 
-R O G U E N 
+C # # # # # 
+O # # # # # 
+I # # # # # 
+N # # # # # 
+# # # # # # 
+# # # # # # 
 
-AaH - SUFFER
-AaV - FALSE
-AfV - ASSIGN
-BaH - EASE
-CaH - FIX
-CeV - EBB
-DaH - ROGUE
-EaH - UNDO
-FaH - SIZE
+AaV - COIN

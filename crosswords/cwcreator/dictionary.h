@@ -46,7 +46,7 @@ public:
 
 private:
 	map <string,vector<string> > words;
-	vector<string> possibleWords;
+	vector<string> validWords;
 };
 
 #endif

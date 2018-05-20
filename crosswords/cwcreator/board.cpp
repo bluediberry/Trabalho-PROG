@@ -1,5 +1,5 @@
 #include "board.h"
-#include "Dictionary.h"
+#include "dictionary.h"
 #include <iomanip>
 #include <map>
 #include <iostream>
@@ -254,10 +254,10 @@ bool Board::checkIfFull(unsigned int x, unsigned int y)
 void Board::Finish(unsigned int x, unsigned int y)
 {
     unsigned int i, j;
-    for (j = 0; j <= x - 1; j++)
-        for (i = 0; i <= y - 1; i++)
+    for (j = 0; j <= x ; j++)
+        for (i = 0; i <= y ; i++)
             if (board[i][j]   == '.')
-                board[i][j]   == '#';
+                board[i][j]   = '#';
 }
 
 
