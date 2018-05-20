@@ -126,7 +126,7 @@ void save_board(Board &b1, unsigned int x, unsigned int y, vector<string> &posit
 
     stringstream filenameb;
     filenameb << setw(3) << setfill('0') << boardnr;
-    string filename = "b" + filenameb.str() + ".txt";
+    string filename = "b" + filenameb.str() + "_p.txt";
     of.open(filename);
     if (of.fail())
     {
@@ -144,7 +144,7 @@ void save_board(Board &b1, unsigned int x, unsigned int y, vector<string> &posit
 
 //==========================================================================================
 // Deals with processing words and positioning on the board
-void crosswords(string &location, string &input, Dictionary &d1, Board &b1, vector<string> &words, vector<string> &positions,  unsigned int x, unsigned int y)
+void crosswords(string &location, string &input, Dictionary &d1, Board &b2, vector<string> &words, vector<string> &positions,  unsigned int x, unsigned int y)
 {
     vector<string> fittingWords;
     int numberOfFittingWords;
@@ -174,12 +174,12 @@ void crosswords(string &location, string &input, Dictionary &d1, Board &b1, vect
         }
         switch (option) {
             case 1:
-                save_board(b1, x, y, positions, words);
+                save_board(b2, x, y, positions, words);
                 exit();
                 break;
             case 2:
-                b1.Finish(x, y);
-                save_board(b1, x, y, positions, words);
+                b2.Finish(x, y);
+                save_board(b2, x, y, positions, words);
                 exit();
                 break;
             case 3:
@@ -213,14 +213,14 @@ void crosswords(string &location, string &input, Dictionary &d1, Board &b1, vect
             cin.clear();
             cin.ignore(9000000, '\n');
             if (input == "-") {
-                resetBoard(b1, x, y);
-                removeWord(location, b1, positions, words);
+                resetBoard(b2, x, y);
+                removeWord(location, b2, positions, words);
                 cout << endl;
-                b1.showBoard(x, y);
+                b2.showBoard(x, y);
                 break;
             }
             if (input == "?") {
-                getSuggestion(location, d1, b1, fittingWords, numberOfFittingWords);
+                getSuggestion(location, d1, b2, fittingWords, numberOfFittingWords);
             }
             if (input != "?") {
                 cout << endl;
@@ -244,12 +244,12 @@ void crosswords(string &location, string &input, Dictionary &d1, Board &b1, vect
             if (numberOfFittingWords == 0);
             else {
                 if (input != "-") {
-                    if (b1.wordFits(location, input) && find(words.begin(), words.end(), input) == words.end()) {
+                    if (b2.wordFits(location, input) && find(words.begin(), words.end(), input) == words.end()) {
                         positions.push_back(location);
                         words.push_back(input);
-                        b1.updateBoard(location, input);
+                        b2.updateBoard(location, input);
                         cout << endl;
-                        b1.showBoard(x, y);
+                        b2.showBoard(x, y);
                     } else {
                         cout << endl << "Please choose a word that is possible to place." << endl;
                     }
@@ -258,12 +258,12 @@ void crosswords(string &location, string &input, Dictionary &d1, Board &b1, vect
         else {
 
             if (input != "-") {
-                if (b1.wordFits(location, input) && find(words.begin(), words.end(), input) == words.end()) {
+                if (b2.wordFits(location, input) && find(words.begin(), words.end(), input) == words.end()) {
                     positions.push_back(location);
                     words.push_back(input);
-                    b1.updateBoard(location, input);
+                    b2.updateBoard(location, input);
                     cout << endl;
-                    b1.showBoard(x, y);
+                    b2.showBoard(x, y);
                 } else {
                     cout << endl << "Please choose a word that is possible to place." << endl;
                 }
@@ -272,95 +272,6 @@ void crosswords(string &location, string &input, Dictionary &d1, Board &b1, vect
 
     }
 
-}
-
-//==========================================================================================
-// Creates a new board with the desired width and length and in the end saves it
-void createBoard()
-{
-    unsigned int x;
-    unsigned int y;
-    string location;
-    string input;
-    string filename;
-    ifstream f;
-    vector<string> words;
-    vector<string> positions;
-
-    cout << "                 CREATE BOARD" << endl;
-    cout << "=============================================" << endl;
-
-    cin.ignore(1000,  '\n');
-    cin.clear();
-
-    openFile(filename, f);
-    Dictionary d1(f);
-
-    cout << "Board size (lines columns) ? ";
-    cin >> x >> y;
-    while ((x > 26 || y > 26) || (x <= 0 || y <= 0))
-    {
-        cout << endl << "Please choose a number between 1 and 26." << endl;
-        cin.clear();
-        cin.ignore(99999, '\n');
-        cout << endl << "Board size (lines columns)? ";
-        cin >> x >> y;
-    }
-    Board b1(x, y);
-    cout << endl;
-    b1.showBoard(x, y);
-
-    while (!cin.eof() && !b1.checkIfFull(x, y)) {
-
-        cout << endl;
-        crosswords(location, input, d1, b1, words, positions, x, y);
-
-    }
-
-
-    if(cin.fail()) {
-        if(!cin.eof())
-            cin.ignore(1000,  '\n');
-        cin.clear();
-    }
-
-
-
-    cin.clear();
-    cin.ignore(9999, '\n');
-    cout << "=============================================" << endl;
-    cout << "                 SAVE BOARD " << endl;
-    cout << "=============================================" << endl << endl;
-    cout << "[1] Save to complete later." << endl;
-    cout << "[2] Save and finish." << endl;
-    cout << "[3] Do not save." << endl;
-    cout << "[4] Do not save and Restart" << endl;
-    int option;
-    cin >> option;
-    while (option > 4 || option < 1 || cin.fail() || cin.eof()) {
-        cin.clear();
-        cin.ignore(10, '\n');
-        cout << "Invalid option! Try again." << endl;
-        cin >> option;
-    }
-    switch (option) {
-        case 1:
-            save_board(b1, x, y, positions, words);
-            exit();
-            break;
-        case 2:
-            b1.Finish(x, y);
-            save_board(b1, x, y, positions, words);
-            exit();
-            break;
-        case 3:
-            exit();
-            break;
-        case 4:
-            createBoard();
-            exit();
-            break;
-    }
 }
 
 //==========================================================================================
@@ -527,19 +438,27 @@ void reloadBoard(unsigned int &x, unsigned int &y, string &location, string &inp
     */
 }
 
-void play_game(Player name, Board b1, unsigned int x, unsigned int y) {
+void play_game(string &location, string &input, vector<string> &positions, vector<string> &words, Player name, Board b1, unsigned int x, unsigned int y, Dictionary &d1) {
 
     cout << "=============================================" << endl;
     cout << "               Game Start" << endl;
     cout << "=============================================" << endl;
     cout << endl << "Welcome, " << name.getName() << endl << endl;
 
- //  while(!cin.eof()) {
-        Board b2(x,y);
+   // b1.Finish(x,y);
+
+    Board b2(x,y);
+
+   while(!cin.eof() && !b2.checkIfFull(x,y))   {
+
 
         b2.showEmptyBoard(x, y);
 
-  //  }
+       crosswords(location, input, d1, b2, words, positions, x, y);
+
+    }
+
+
 
 }
 
@@ -571,6 +490,7 @@ int main() {
     vector<string> positions;
     unsigned int x, y;
 
+    Dictionary d1(f);
     srand(time(NULL));
     Board b1(x,y);
 
@@ -599,7 +519,8 @@ int main() {
             cout << "Loading game...." << endl;
             cout << "=============================================" << endl;
             Player player = player_name();
-            play_game(player, b1, x, y);
+
+            play_game(location, input, positions, words, player, b1, x, y, d1);
 
     }
     else if(option == 0) exit();

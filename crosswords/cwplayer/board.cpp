@@ -1,5 +1,6 @@
 #include "board.h"
 #include "dictionary.h"
+#include "player.h"
 #include <iomanip>
 #include <map>
 #include <iostream>
@@ -266,6 +267,8 @@ void Board::Finish(unsigned int x, unsigned int y)
 void Board::Write(ofstream& file, string name, unsigned int x, unsigned int y, vector<string> &positions, vector<string> &words)
 {
     file << name << endl << endl;
+
+    file << player_name << endl << endl;
 
     for (size_t i = 1; i < board.size(); i++) {
         for (size_t j = 1; j < board.at(i).size(); j++)

@@ -16,14 +16,8 @@ public:
     string getName();
     Player(const string& name);
     int getAlternativeClues();
-    double getElapsedTime();
-    void incrementAltClues();
-    void printAlternativeClues();
-    void updateStartTime();
     void printStartTime();
-    void updateEndTime();
     void printEndTime();
-    void updateElapsedTime();
     void printElapsedInSeconds();
 
 

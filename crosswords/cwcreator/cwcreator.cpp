@@ -31,7 +31,7 @@ string filename(const string& s)
 void uppercase(string &word)
 {
 	for (unsigned int i = 0; i < word.length(); ++i)
-		word[i] = toupper(word[i]);
+		word[i] = toupper(word[i]); //the word is converted into all uppercase
 }
 
 //==========================================================================================
@@ -42,8 +42,8 @@ void removeWord(string &location, Board &b1, vector<string> &positions, vector<s
 	{
 		if (positions.at(i) == location)
 		{
-			positions.erase(positions.begin() + i);
-			words.erase(words.begin() + i);
+			positions.erase(positions.begin() + i); //erases from the positions vector
+			words.erase(words.begin() + i); //erases from the words vector
 		}
 	}
 	for (unsigned int j = 0; j < positions.size(); j++)
@@ -67,17 +67,18 @@ void getSuggestion(string &location, Dictionary &d1, Board &b1, vector<string> &
     for (unsigned int i = 0; i < d1.nWords(); i++)
     {
         string syn = d1.wordsList(i);
-        uppercase(syn);
+        uppercase(syn); //shows all synonyms in uppercase
         if (b1.wordFits(location, syn))
         {
-            fittingWords.push_back(syn);
+            fittingWords.push_back(syn); //if a synonym is valid its pushed onto the fitting words vector
         }
     }
 
-    sort(fittingWords.begin(), fittingWords.end());
-    fittingWords.erase(unique(fittingWords.begin(), fittingWords.end()), fittingWords.end());
+    sort(fittingWords.begin(), fittingWords.end()); //rearranges the synonyms vector
+    fittingWords.erase(unique(fittingWords.begin(), fittingWords.end()), fittingWords.end()); //deletes duplicates
 
     srand(time(NULL));
+    //if possible, shows a list compromised of 5 random words out the synonyms vector that fit the location
     if (fittingWords.size() == 0)
         cout << "There are no available words that fit in that location" << endl;
     else
@@ -133,8 +134,8 @@ void save_board(Board &b1, unsigned int x, unsigned int y, vector<string> &posit
 
     stringstream filenameb;
     filenameb << setw(3) << setfill('0') << boardnr;
-    string filename = "b" + filenameb.str() + ".txt";
-    of.open(filename);
+    string filename = "b" + filenameb.str() + ".txt"; //format of the board save file
+    of.open(filename); //opens the file
     if (of.fail())
     {
         cerr << "Error in opening file" << endl;
@@ -142,7 +143,7 @@ void save_board(Board &b1, unsigned int x, unsigned int y, vector<string> &posit
     }
     cout << "Writing to file " << filename << "." << endl;
 
-    b1.Write(of, filename, x, y, positions, words);
+    b1.Write(of, filename, x, y, positions, words); //writes the board to the previously open file
     cin.clear();
     cin.ignore(9999, '\n');
 
@@ -209,7 +210,7 @@ void crosswords(string &location, string &input, Dictionary &d1, Board &b1, vect
     cout << "Position ( LCD / CTRL-Z = stop ) ? ";
     cin >> location;
 
-        if (location == "CTRL-Z")
+        if (location == "CTRL-Z") //equivalent of cin.eof(), terminates the program and saves
         {
             cin.clear();
             cin.ignore(9999, '\n');
@@ -230,11 +231,11 @@ void crosswords(string &location, string &input, Dictionary &d1, Board &b1, vect
                 }
             switch (option) {
                 case 1:
-                    save_board(b1, x, y, positions, words);
+                    save_board(b1, x, y, positions, words); //saves the board as is
                     exit();
                     break;
                 case 2:
-                    b1.Finish(x, y);
+                    b1.Finish(x, y); //the board is finished and cannot be continued later
                     save_board(b1, x, y, positions, words);
                     exit();
                     break;
@@ -242,7 +243,7 @@ void crosswords(string &location, string &input, Dictionary &d1, Board &b1, vect
                     exit();
                     break;
                 case 4:
-                    createBoard();
+                    createBoard(); //returns to the crate board interface
                     exit();
                     break;
             }
@@ -264,19 +265,19 @@ void crosswords(string &location, string &input, Dictionary &d1, Board &b1, vect
     if (cin) {
         cout << "Word ( - = remove / ? = help ) ..? ";
         cin >> input;
-        uppercase(input);
-        while (!d1.isInDictionary(input)) {
+        uppercase(input); //converts the input into uppercase
+        while (!d1.isInDictionary(input)) { //checks all the valid and invalid inputs
             cin.clear();
             cin.ignore(9000000, '\n');
             if (input == "-") {
                 resetBoard(b1, x, y);
-                removeWord(location, b1, positions, words);
+                removeWord(location, b1, positions, words); //deletes a previously placed word
                 cout << endl;
                 b1.showBoard(x, y);
                 break;
             }
             if (input == "?") {
-                getSuggestion(location, d1, b1, fittingWords, numberOfFittingWords);
+                getSuggestion(location, d1, b1, fittingWords, numberOfFittingWords); //show a list of words that can be placed
             }
             if (input != "?") {
                 cout << endl;
@@ -349,7 +350,7 @@ void createBoard()
     cin.ignore(1000,  '\n');
     cin.clear();
 
-	openFile(filename, f);
+	openFile(filename, f); //opens the dicitionary synonyms file
 	Dictionary d1(f);
 
 	cout << "Board size (lines columns) ? ";
@@ -362,11 +363,11 @@ void createBoard()
 		cout << endl << "Board size (lines columns)? ";
 		cin >> x >> y;
 	}
-	Board b1(x, y);
+	Board b1(x, y); //creates a board with the specified size
 	cout << endl;
-	b1.showBoard(x, y);
+	b1.showBoard(x, y); //shows the board on the screen
 
-        while (!cin.eof() && !b1.checkIfFull(x, y)) {
+        while (!cin.eof() && !b1.checkIfFull(x, y)) { //ends if eof or if the board is full
 
             cout << endl;
             crosswords(location, input, d1, b1, words, positions, x, y);
@@ -429,7 +430,7 @@ void openBoard(string &filename, ifstream &f)
         cout << "Board File Name? ";
         getline(cin, filename);
 
-        f.open(filename);
+        f.open(filename); //open the board fiel
 
         if (!f.is_open())
         {
@@ -462,7 +463,7 @@ void reloadBoard(unsigned int &x, unsigned int &y, string &location, string &inp
     cin.ignore(1000,  '\n');
     cin.clear();
 
-    openBoard(filename, f);
+    openBoard(filename, f); //opens the board
 
     while(getline(f, line))
     {
@@ -478,13 +479,13 @@ void reloadBoard(unsigned int &x, unsigned int &y, string &location, string &inp
             max = lines - 1;
 
         if(lines > 1)
-            if(line.find_first_of('.') != string::npos)
+            if(line.find_first_of('.') != string::npos) //if there are . that means the board is unfinished
                 unfinished = true;
 
         if(lines == 2) { y = line.length() / 2; }
 
         if(line.length() > 0)
-            if(line.find('-') != string::npos)
+            if(line.find('-') != string::npos) //the - divides the positions from the placed word
             {
                 positions.push_back(line.substr(0, line.find('-') - 1));
                 words.push_back(line.substr(line.find('-') + 2, line.length()));
@@ -502,14 +503,14 @@ void reloadBoard(unsigned int &x, unsigned int &y, string &location, string &inp
     cin.ignore(1000,  '\n');
     cin.clear();
     if(unfinished)
-    openFile(dictFile, dictionaryFile);
+    openFile(dictFile, dictionaryFile); //opens the dictionary file
     Dictionary rd1(dictionaryFile);
 
 
-    Board rb1(x,y);
+    Board rb1(x,y); //creates a new board with the same size as the last one
 
     for (unsigned int i = 0; i < positions.size(); i++) {
-        rb1.updateBoard(positions.at(i), words.at(i));
+        rb1.updateBoard(positions.at(i), words.at(i)); //places all the user inputs back onto the board again
     }
 
 
@@ -530,11 +531,11 @@ void reloadBoard(unsigned int &x, unsigned int &y, string &location, string &inp
             while (!cin.eof() && !rb1.checkIfFull(x, y)) {
 
                 cout << endl;
-                crosswords(location, input, rd1, rb1, words, positions, x, y);
+                crosswords(location, input, rd1, rb1, words, positions, x, y); //continues the crosswords word placement
 
             }
 
-            if(!rb1.CheckBoard(x, y, rb1, rd1)) {
+            if(!rb1.CheckBoard(x, y, rb1, rd1)) { //does a check to see if all words are valid
 
                 cout << "This board can't be finished because it contains invalid words." << endl;
             }
