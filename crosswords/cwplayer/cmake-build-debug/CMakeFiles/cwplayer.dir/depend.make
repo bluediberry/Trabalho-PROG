@@ -4,6 +4,7 @@
 CMakeFiles/cwplayer.dir/board.cpp.o: ../board.cpp
 CMakeFiles/cwplayer.dir/board.cpp.o: ../board.h
 CMakeFiles/cwplayer.dir/board.cpp.o: ../dictionary.h
+CMakeFiles/cwplayer.dir/board.cpp.o: ../player.h
 
 CMakeFiles/cwplayer.dir/cwcreator.cpp.o: ../board.h
 CMakeFiles/cwplayer.dir/cwcreator.cpp.o: ../cwcreator.cpp

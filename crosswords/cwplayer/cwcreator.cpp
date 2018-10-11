@@ -14,7 +14,7 @@
 
 using namespace std;
 
-void createBoard();
+//void createBoard();
 
 int exit();
 
@@ -186,7 +186,7 @@ void crosswords(string &location, string &input, Dictionary &d1, Board &b2, vect
                 exit();
                 break;
             case 4:
-                createBoard();
+               // createBoard();
                 exit();
                 break;
         }

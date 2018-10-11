@@ -266,25 +266,6 @@ void Board::Finish(unsigned int x, unsigned int y)
 // Writes the contents of the board in a sequential order
 void Board::Write(ofstream& file, string name, unsigned int x, unsigned int y, vector<string> &positions, vector<string> &words)
 {
-    file << name << endl << endl;
-
-    file << player_name << endl << endl;
-
-    for (size_t i = 1; i < board.size(); i++) {
-        for (size_t j = 1; j < board.at(i).size(); j++)
-            file << board.at(i).at(j) << ' ';
-        file << endl;
-    }
-    file << endl;
-
-    sort(positions.begin(), positions.end());
-
-    for (unsigned int i = 0; i < positions.size(); i++)
-    {
-        file << positions.at(i) << " - " << words.at(i) << endl;
-    }
-
-    file.close();
 
 }
 
